@@ -10,3 +10,8 @@
 
 output/*
 hw2_data/*
+P1_ckpt
+output_folder_example
+PB1_output
+P1_tb
+**__pycache__
