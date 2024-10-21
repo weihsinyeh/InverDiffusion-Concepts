@@ -15,3 +15,4 @@ output_folder_example
 PB1_output
 P1_tb
 **__pycache__
+**ckpt
