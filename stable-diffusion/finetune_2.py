@@ -5,11 +5,14 @@ from ldm.modules.encoders.modules import FrozenCLIPEmbedder
 from ldm.util import instantiate_from_config
 from transformers import CLIPTokenizer
 import torch.optim as optim
+import PIL
 from PIL import Image
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 import itertools
 from omegaconf import OmegaConf
+import numpy as np
+import random
 def load_model_from_config2(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
@@ -69,9 +72,7 @@ class ImageCaptionDataset(Dataset):
         self.captions = captions
         self.tokenizer = tokenizer
         self.transform = transform or transforms.Compose([
-            transforms.Resize((256, 256)),
             transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
         ])
 
     def __len__(self):
@@ -83,6 +84,142 @@ class ImageCaptionDataset(Dataset):
         caption = self.captions[idx]
         #tokens = self.tokenizer(caption, return_tensors="pt", padding=True, truncation=True)
         return {"pixel_values": image, "input_ids": caption}
+
+imagenet_templates_small = [
+    "a photo of a {}",
+    "a rendering of a {}",
+    "a cropped photo of the {}",
+    "the photo of a {}",
+    "a photo of a clean {}",
+    "a photo of a dirty {}",
+    "a dark photo of the {}",
+    "a photo of my {}",
+    "a photo of the cool {}",
+    "a close-up photo of a {}",
+    "a bright photo of the {}",
+    "a cropped photo of a {}",
+    "a photo of the {}",
+    "a good photo of the {}",
+    "a photo of one {}",
+    "a close-up photo of the {}",
+    "a rendition of the {}",
+    "a photo of the clean {}",
+    "a rendition of a {}",
+    "a photo of a nice {}",
+    "a good photo of a {}",
+    "a photo of the nice {}",
+    "a photo of the small {}",
+    "a photo of the weird {}",
+    "a photo of the large {}",
+    "a photo of a cool {}",
+    "a photo of a small {}",
+]
+
+imagenet_style_templates_small = [
+    "a painting in the style of {}",
+    "a rendering in the style of {}",
+    "a cropped painting in the style of {}",
+    "the painting in the style of {}",
+    "a clean painting in the style of {}",
+    "a dirty painting in the style of {}",
+    "a dark painting in the style of {}",
+    "a picture in the style of {}",
+    "a cool painting in the style of {}",
+    "a close-up painting in the style of {}",
+    "a bright painting in the style of {}",
+    "a cropped painting in the style of {}",
+    "a good painting in the style of {}",
+    "a close-up painting in the style of {}",
+    "a rendition in the style of {}",
+    "a nice painting in the style of {}",
+    "a small painting in the style of {}",
+    "a weird painting in the style of {}",
+    "a large painting in the style of {}",
+]
+
+
+class TextualInversionDataset(Dataset):
+    def __init__(
+        self,
+        data_root,
+        tokenizer,
+        learnable_property="object",  # [object, style]
+        size=512,
+        repeats=100,
+        interpolation="bicubic",
+        flip_p=0.5,
+        set="train",
+        placeholder_token="*",
+        center_crop=False,
+    ):
+        self.data_root = data_root
+        self.tokenizer = tokenizer
+        self.learnable_property = learnable_property
+        self.size = size
+        self.placeholder_token = placeholder_token
+        self.center_crop = center_crop
+        self.flip_p = flip_p
+
+        self.image_paths = [os.path.join(self.data_root, file_path) for file_path in os.listdir(self.data_root)]
+
+        self.num_images = len(self.image_paths)
+        self._length = self.num_images
+
+        if set == "train":
+            self._length = self.num_images * repeats
+
+        self.interpolation = {
+            "linear": PIL.Image.LINEAR,
+            "bilinear": PIL.Image.BILINEAR,
+            "bicubic": PIL.Image.BICUBIC,
+            "lanczos": PIL.Image.LANCZOS,
+        }[interpolation]
+
+        self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
+        self.flip_transform = transforms.RandomHorizontalFlip(p=self.flip_p)
+
+    def __len__(self):
+        return self._length
+
+    def __getitem__(self, i):
+        example = {}
+        image = Image.open(self.image_paths[i % self.num_images])
+
+        if not image.mode == "RGB":
+            image = image.convert("RGB")
+
+        placeholder_string = self.placeholder_token
+        text = random.choice(self.templates).format(placeholder_string)
+        '''
+        example["input_ids"] = self.tokenizer(
+            text,
+            padding="max_length",
+            truncation=True,
+            max_length=self.tokenizer.model_max_length,
+            return_tensors="pt",
+        ).input_ids[0]
+        '''
+        example["input_ids"] = text
+        # default to score-sde preprocessing
+        img = np.array(image).astype(np.uint8)
+
+        if self.center_crop:
+            crop = min(img.shape[0], img.shape[1])
+            h, w, = (
+                img.shape[0],
+                img.shape[1],
+            )
+            img = img[(h - crop) // 2 : (h + crop) // 2, (w - crop) // 2 : (w + crop) // 2]
+
+        image = Image.fromarray(img)
+        image = image.resize((self.size, self.size), resample=self.interpolation)
+
+        image = self.flip_transform(image)
+        image = np.array(image).astype(np.uint8)
+        image = (image / 127.5 - 1.0).astype(np.float32)
+
+        example["pixel_values"] = torch.from_numpy(image).permute(2, 0, 1)
+        return example
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
 checkpoint_path = "./models/ldm/stable-diffusion-v1/model.ckpt"
@@ -107,7 +244,7 @@ if num_added_tokens == 0:
     raise ValueError(f"The tokenizer already contains the token {placeholder_token}. Please use a unique token.")
 
 # Load Dataset
-train_data = ImageCaptionDataset(image_folder, captions, tokenizer)
+train_data = TextualInversionDataset(data_root=image_folder,  tokenizer=tokenizer)
 train_dataloader = DataLoader(train_data, batch_size=1, shuffle=True)
 
 # Convert token to IDs
@@ -124,14 +261,12 @@ text_encoder.transformer.resize_token_embeddings(len(tokenizer))
 print(f"Tokenizer vocab size: {len(tokenizer)}")
 print(f"Embedding layer size: {text_encoder.transformer.get_input_embeddings().weight.shape[0]}")
 
-optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(),   lr=5e-5)
- 
-train_data = ImageCaptionDataset(image_folder, captions, tokenizer)
-train_dataloader = DataLoader(train_data, batch_size=1, shuffle=True)
+optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(),   lr=5e-3)
+
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 # Training loop
-for epoch in range(2):  # Adjust epochs as needed
+for epoch in range(20):  # Adjust epochs as needed
     model.train()
     for step, batch in enumerate(train_dataloader):
         optimizer.zero_grad()
@@ -180,12 +315,13 @@ for epoch in range(2):  # Adjust epochs as needed
         optimizer.step()
         print(f"Epoch {epoch}, Step {step}, Loss: {loss.item()}")
 
-model.cond_stage_model.tokenizer = tokenizer
-new_ckpt_path = os.path.join(output_dir, "fine_tuned.ckpt")
-checkpoint = {"state_dict": model.state_dict()}
-checkpoint["tokenizer"] = tokenizer
-# Save the model's state_dict inside the checkpoint dictionary
-torch.save(checkpoint, new_ckpt_path)
+    model.cond_stage_model.tokenizer = tokenizer
+    ckpt_name = "fine_tuned_" + str(epoch)+ ".ckpt"
+    new_ckpt_path = os.path.join(output_dir, ckpt_name)
+    checkpoint = {"state_dict": model.state_dict()}
+    checkpoint["tokenizer"] = tokenizer
+    # Save the model's state_dict inside the checkpoint dictionary
+    torch.save(checkpoint, new_ckpt_path)
 
 '''
 

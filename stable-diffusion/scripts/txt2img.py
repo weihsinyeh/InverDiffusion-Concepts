@@ -44,6 +44,19 @@ def load_model_from_config(config, ckpt, verbose=False):
         print(f"Global Step: {pl_sd['global_step']}")
     sd = pl_sd["state_dict"]
     model = instantiate_from_config(config.model)
+    
+    # Check for the embeddings key
+    embedding_key = "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"
+
+    # Check if the embeddings key exists in the loaded state dict
+    if embedding_key in sd:
+        loaded_embedding_size = sd[embedding_key].size(0)
+        current_embedding_size = model.cond_stage_model.transformer.get_input_embeddings().weight.size(0)
+
+        if loaded_embedding_size != current_embedding_size:
+            print(f"Size mismatch detected: loaded {loaded_embedding_size}, current {current_embedding_size}. Resizing embeddings.")
+            model.cond_stage_model.transformer.resize_token_embeddings(loaded_embedding_size)
+
     m, u = model.load_state_dict(sd, strict=False)
     if len(m) > 0 and verbose:
         print("missing keys:")
