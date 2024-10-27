@@ -1,0 +1,2 @@
+$ python finetune_2.py > tmp
+$ python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "<new1>"  > tmp2

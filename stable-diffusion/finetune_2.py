@@ -227,12 +227,6 @@ output_dir = "/project/g/r13922043/hw2/checkpoints"
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/0"
 placeholder_token = "<new1>"
 
-captions = [    f"This is {placeholder_token} in a specific style.",
-                f"An example of {placeholder_token}.",
-                f"Representation of {placeholder_token}.",
-                f"A scene with {placeholder_token}.",
-                f"Artwork of {placeholder_token}.",]
-
 # Load Model Configuration and Checkpoint
 config = OmegaConf.load(config_path)
 model = load_model_from_config(config, checkpoint_path)
@@ -244,8 +238,8 @@ if num_added_tokens == 0:
     raise ValueError(f"The tokenizer already contains the token {placeholder_token}. Please use a unique token.")
 
 # Load Dataset
-train_data = TextualInversionDataset(data_root=image_folder,  tokenizer=tokenizer)
-train_dataloader = DataLoader(train_data, batch_size=1, shuffle=True)
+train_data = TextualInversionDataset(data_root=image_folder,  tokenizer=tokenizer, placeholder_token=placeholder_token)
+train_dataloader = DataLoader(train_data, batch_size=4, shuffle=True)
 
 # Convert token to IDs
 token_ids = tokenizer.encode(placeholder_token)
@@ -254,14 +248,9 @@ placeholder_token_id = tokenizer.convert_tokens_to_ids(placeholder_token)
 # Load text encoder
 text_encoder = model.cond_stage_model
 
-# Resize embeddings to include the new token
-print(f"Tokenizer vocab size: {len(tokenizer)}")
-print(f"Embedding layer size: {text_encoder.transformer.get_input_embeddings().weight.shape[0]}")
 text_encoder.transformer.resize_token_embeddings(len(tokenizer))
-print(f"Tokenizer vocab size: {len(tokenizer)}")
-print(f"Embedding layer size: {text_encoder.transformer.get_input_embeddings().weight.shape[0]}")
 
-optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(),   lr=5e-3)
+optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=5e-3)
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
@@ -272,7 +261,6 @@ for epoch in range(20):  # Adjust epochs as needed
         optimizer.zero_grad()
 
         batch["pixel_values"] = batch["pixel_values"].to(device)
-        print(batch["input_ids"])
         
         # Encode image to latent space
         latents = model.encode_first_stage(batch["pixel_values"])
@@ -287,8 +275,6 @@ for epoch in range(20):  # Adjust epochs as needed
         noisy_latents = model.q_sample(latents, timesteps, noise)
 
         token_id = tokenizer(batch["input_ids"], return_tensors="pt", padding=True, truncation=True)
-        print(batch["input_ids"])
-        print("token_id : ",token_id)
         encoder_hidden_states = model.cond_stage_model(batch["input_ids"])
   
         # Forward pass for noise prediction
@@ -301,18 +287,12 @@ for epoch in range(20):  # Adjust epochs as needed
         model_embeddings = text_encoder.transformer.get_input_embeddings().weight.grad
         # Check if gradients exist
         if model_embeddings is not None:
-            print("Gradients exist.")
-            
-            # Create a mask to identify non-placeholder tokens
-            index_grads_to_zero = torch.arange(len(text_encoder.tokenizer)) != placeholder_token_id
-            
-            # Set gradients for non-placeholder tokens to zero
-            model_embeddings.data[index_grads_to_zero, :] = 0  # Clear gradients for non-placeholder tokens
-        else:
-            print("No gradients were computed.")
+            index_grads_to_zero = torch.arange(len(tokenizer)) != placeholder_token_id
+            model_embeddings.data[index_grads_to_zero, :] = model_embeddings.data[index_grads_to_zero, :].fill_(0)
 
         # Perform optimizer step
         optimizer.step()
+        optimizer.zero_grad()
         print(f"Epoch {epoch}, Step {step}, Loss: {loss.item()}")
 
     model.cond_stage_model.tokenizer = tokenizer
@@ -350,11 +330,11 @@ state_dict["state_dict"]["cond_stage_model.transformer"] = text_encoder_state_di
 new_ckpt_path = os.path.join(output_dir, "fine_tuned.ckpt")
 torch.save(state_dict, new_ckpt_path)
 print(f"New model is saved to: {new_ckpt_path}")
-'''
+
 config = OmegaConf.load(config_path)
 model, tokenizer = load_model_from_config2(config, new_ckpt_path)
 tokens = tokenizer('<new1>', return_tensors="pt", padding=True, truncation=True)
 print("tokens",tokens)
 tokenizer = model.cond_stage_model.tokenizer
 tokens = tokenizer('<new1>', return_tensors="pt", padding=True, truncation=True)
-print("tokens",tokens)
+'''

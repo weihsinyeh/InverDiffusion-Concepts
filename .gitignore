@@ -7,7 +7,7 @@
 *.pyc
 *.pyo
 *.bin
-
+logdir
 output/*
 hw2_data/*
 P1_ckpt
