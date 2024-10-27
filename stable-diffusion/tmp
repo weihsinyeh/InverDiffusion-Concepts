@@ -1,0 +1,70 @@
+Loading model from ./models/ldm/stable-diffusion-v1/model.ckpt
+Global Step: 470000
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Tokenizer vocab size: 49409
+Embedding layer size: 49408
+Tokenizer vocab size: 49409
+Embedding layer size: 49409
+['Artwork of <new1>.']
+['Artwork of <new1>.']
+token_id :  {'input_ids': tensor([[49406,  4188,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 0, Step 0, Loss: 0.18859995901584625
+['An example of <new1>.']
+['An example of <new1>.']
+token_id :  {'input_ids': tensor([[49406,   550,  6228,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 0, Step 1, Loss: 0.03900769725441933
+['This is <new1> in a specific style.']
+['This is <new1> in a specific style.']
+token_id :  {'input_ids': tensor([[49406,   589,   533, 49408,   530,   320, 10528,  1844,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 0, Step 2, Loss: 0.0036470252089202404
+['A scene with <new1>.']
+['A scene with <new1>.']
+token_id :  {'input_ids': tensor([[49406,   320,  3562,   593, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 0, Step 3, Loss: 0.03838590532541275
+['Representation of <new1>.']
+['Representation of <new1>.']
+token_id :  {'input_ids': tensor([[49406, 13520,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 0, Step 4, Loss: 0.1003197580575943
+['Representation of <new1>.']
+['Representation of <new1>.']
+token_id :  {'input_ids': tensor([[49406, 13520,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 1, Step 0, Loss: 0.01657247729599476
+['An example of <new1>.']
+['An example of <new1>.']
+token_id :  {'input_ids': tensor([[49406,   550,  6228,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 1, Step 1, Loss: 0.025292938575148582
+['A scene with <new1>.']
+['A scene with <new1>.']
+token_id :  {'input_ids': tensor([[49406,   320,  3562,   593, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 1, Step 2, Loss: 0.05604688078165054
+['This is <new1> in a specific style.']
+['This is <new1> in a specific style.']
+token_id :  {'input_ids': tensor([[49406,   589,   533, 49408,   530,   320, 10528,  1844,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 1, Step 3, Loss: 0.10535227507352829
+['Artwork of <new1>.']
+['Artwork of <new1>.']
+token_id :  {'input_ids': tensor([[49406,  4188,   539, 49408,   269, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+Gradients exist.
+Epoch 1, Step 4, Loss: 0.04036037623882294
+Loading model from /project/g/r13922043/hw2/checkpoints/fine_tuned.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+tokens {'input_ids': tensor([[49406, 49408, 49407]]), 'attention_mask': tensor([[1, 1, 1]])}
+tokens {'input_ids': tensor([[49406,   283,   686,   272,   285, 49407]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}

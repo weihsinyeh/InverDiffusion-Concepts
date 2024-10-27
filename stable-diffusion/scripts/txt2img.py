@@ -54,7 +54,7 @@ def load_model_from_config(config, ckpt, verbose=False):
 
     model.cuda()
     model.eval()
-    return model
+    return model, pl_sd['tokenizer']
 
 
 def put_watermark(img, wm_encoder=None):
@@ -213,8 +213,8 @@ def main():
     seed_everything(opt.seed)
 
     config = OmegaConf.load(f"{opt.config}")
-    model = load_model_from_config(config, f"{opt.ckpt}")
-
+    model, tokenizer = load_model_from_config(config, f"{opt.ckpt}")
+    model.cond_stage_model.tokenizer = tokenizer
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     model = model.to(device)
 

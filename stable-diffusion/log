@@ -1,0 +1,7 @@
+Model state_dict keys:
+cond_stage_model.transformer.text_model.embeddings.position_ids: torch.Size([1, 77])
+cond_stage_model.transformer.text_model.embeddings.token_embedding.weight: torch.Size([49408, 768])
+cond_stage_model.transformer.text_model.embeddings.position_embedding.weight: torch.Size([77, 768])
+嵌入層維度：torch.Size([49408, 768])
+新 token 嵌入的形狀：torch.Size([768])
+新模型已儲存至：/project/g/r13922043/hw2/checkpoints/model_with_new_token.ckpt
