@@ -157,7 +157,6 @@ class TextualInversionDataset(Dataset):
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
         self.augmentation = transforms.Compose([ 
-                                transforms.RandomApply( [transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p = 0.3),
                                 transforms.RandomGrayscale(p = 0.2),
                                 transforms.RandomHorizontalFlip(),
                                 transforms.RandomApply( [transforms.GaussianBlur((3, 3), (1.0, 2.0))], p = 0.3),
@@ -210,16 +209,16 @@ class TextualInversionDataset(Dataset):
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
 checkpoint_path = "./models/ldm/stable-diffusion-v1/model.ckpt"
-output_dir = "/project/g/r13922043/hw2/checkpoints/1028_data_aug"
-image_folder = "/project/g/r13922043/hw2_data/textual_inversion/0"
-placeholder_token = "<new1>"
+output_dir = "/project/g/r13922043/hw2/checkpoints/1028_data_aug2"
+image_folder = "/project/g/r13922043/hw2_data/textual_inversion/1"
+placeholder_token = "<new2>"
 
 # Load Model Configuration and Checkpoint
 config = OmegaConf.load(config_path)
-model = load_model_from_config(config, checkpoint_path)
+model, tokenizer = load_model_from_config2(config, checkpoint_path)
 
 # Initialize CLIPTokenizer and add placeholder token
-tokenizer = model.cond_stage_model.tokenizer
+# tokenizer = model.cond_stage_model.tokenizer
 num_added_tokens = tokenizer.add_tokens([placeholder_token])
 if num_added_tokens == 0:
     raise ValueError(f"The tokenizer already contains the token {placeholder_token}. Please use a unique token.")
@@ -242,7 +241,7 @@ optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().para
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 # Training loop
-for epoch in range(40):  # Adjust epochs as needed
+for epoch in range(20):  # Adjust epochs as needed
     model.train()
     for step, batch in enumerate(train_dataloader):
         optimizer.zero_grad()
