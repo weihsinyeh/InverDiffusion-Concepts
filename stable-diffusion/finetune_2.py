@@ -225,7 +225,7 @@ if num_added_tokens == 0:
 
 # Load Dataset
 train_data = TextualInversionDataset(data_root=image_folder,  tokenizer=tokenizer, placeholder_token=placeholder_token)
-train_dataloader = DataLoader(train_data, batch_size=8, shuffle=True, num_workers= 4)
+train_dataloader = DataLoader(train_data, batch_size=4, shuffle=True, num_workers= 4)
 
 # Convert token to IDs
 token_ids = tokenizer.encode(placeholder_token)

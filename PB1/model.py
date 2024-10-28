@@ -5,20 +5,22 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-
-class ConvBlock(nn.Module):
-    def __init__(self, in_chans, out_chans, residual=False) -> None:
+# Reference : https://github.com/TeaPearce/Conditional_Diffusion_MNIST/blob/main/script.py
+class ResidualConvBlock(nn.Module):
+    def __init__(self, input_channels, output_channels, residual=False) -> None:
         super().__init__()
+        '''
+        standard ResNet style convolutional block
+        '''
         self.residual = residual
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_chans, out_chans, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(out_chans),
+            nn.Conv2d(input_channels, output_channels, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(output_channels),
             nn.GELU()
         )
         self.conv2 = nn.Sequential(
-            nn.Conv2d(out_chans, out_chans,
-                      kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(out_chans),
+            nn.Conv2d(output_channels, output_channels, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(output_channels),
             nn.GELU()
         )
 
@@ -37,11 +39,11 @@ class ConvBlock(nn.Module):
             return x
 
 
-class U_encoder(nn.Module):
-    def __init__(self, in_chans, out_chans) -> None:
+class Unet_encoder(nn.Module):
+    def __init__(self, input_channels, output_channels) -> None:
         super().__init__()
         self.net = nn.Sequential(
-            ConvBlock(in_chans, out_chans),
+            ResidualConvBlock(input_channels, output_channels),
             nn.MaxPool2d(2)
         )
 
@@ -49,13 +51,13 @@ class U_encoder(nn.Module):
         return self.net(x)
 
 
-class U_decoder(nn.Module):
-    def __init__(self, in_chans, out_chans) -> None:
+class Unet_decoder(nn.Module):
+    def __init__(self, input_channels, output_channels) -> None:
         super().__init__()
         self.net = nn.Sequential(
-            nn.ConvTranspose2d(in_chans, out_chans, kernel_size=2, stride=2),
-            ConvBlock(out_chans, out_chans),
-            ConvBlock(out_chans, out_chans)
+            nn.ConvTranspose2d(input_channels, output_channels, kernel_size=2, stride=2),
+            ResidualConvBlock(output_channels, output_channels),
+            ResidualConvBlock(output_channels, output_channels)
         )
 
     def forward(self, x, skip):
@@ -65,36 +67,33 @@ class U_decoder(nn.Module):
 
 
 class EmbedFC(nn.Module):
-    def __init__(self, in_dim, out_dim) -> None:
+    def __init__(self, input_dimension, output_dimension) -> None:
         super().__init__()
-        self.in_dim = in_dim
+        self.input_dimension = input_dimension
         self.net = nn.Sequential(
-            nn.Linear(in_dim, out_dim),
+            nn.Linear(input_dimension, output_dimension),
             nn.GELU(),
-            nn.Linear(out_dim, out_dim)
+            nn.Linear(output_dimension, output_dimension)
         )
 
     def forward(self, x):
-        x = x.reshape(-1, self.in_dim)
+        x = x.reshape(-1, self.input_dimension)
         return self.net(x)
 
 
 class Unet(nn.Module):
-    def __init__(self, in_channels, n_features, n_classes) -> None:
+    def __init__(self, input_channels, num_features, num_classes) -> None:
         super().__init__()
-        self.in_channels = in_channels
-        self.n_features = n_features
-        self.n_classes = n_classes
+        self.input_channels = input_channels
+        self.num_features = num_features
+        self.num_classes = num_classes
 
-        self.init_conv = ConvBlock(in_channels, n_features, residual=True)
+        self.init_conv = ResidualConvBlock(input_channels, num_features, residual=True)
 
-        self.encode1 = U_encoder(n_features, n_features)
-        self.encode2 = U_encoder(n_features, 2 * n_features)
+        self.encode1 = Unet_encoder(num_features, num_features)
+        self.encode2 = Unet_encoder(num_features, 2 * num_features)
 
-        self.to_vec = nn.Sequential(
-            nn.AvgPool2d(7),
-            nn.GELU()
-        )
+        self.to_vec = nn.Sequential( nn.AvgPool2d(7), nn.GELU())
 
         self.time_embed1 = EmbedFC(1, 2 * n_features)
         self.time_embed2 = EmbedFC(1, n_features)
@@ -103,20 +102,17 @@ class Unet(nn.Module):
         self.contextembed2 = EmbedFC(n_classes, n_features)
 
         self.decode0 = nn.Sequential(
-            nn.ConvTranspose2d(2 * n_features, 2 * n_features,
-                               kernel_size=7, stride=7),
+            nn.ConvTranspose2d(2 * n_features, 2 * n_features, kernel_size=7, stride=7),
             nn.GroupNorm(8, 2 * n_features),
             nn.ReLU(True),
         )
-        self.decode1 = U_decoder(4 * n_features, n_features)
-        self.decode2 = U_decoder(2 * n_features, n_features)
+        self.decode1 = Unet_decoder(4 * n_features, n_features)
+        self.decode2 = Unet_decoder(2 * n_features, n_features)
         self.out = nn.Sequential(
-            nn.Conv2d(2 * n_features, n_features,
-                      kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(2 * n_features, n_features, kernel_size=3, stride=1, padding=1),
             nn.GroupNorm(8, n_features),
             nn.ReLU(True),
-            nn.Conv2d(n_features, self.in_channels,
-                      kernel_size=3, stride=1, padding=1)
+            nn.Conv2d(n_features, self.in_channels, kernel_size=3, stride=1, padding=1)
         )
 
     def forward(self, x, c, t, context_mask):
@@ -125,9 +121,8 @@ class Unet(nn.Module):
         enc2 = self.encode2(enc1)
         hidden_vec = self.to_vec(enc2)
 
-        # convert context
-        c = nn.functional.one_hot(
-            c, num_classes=self.n_classes).type(torch.float)
+        # convert context to one hot embedding
+        c = nn.functional.one_hot(c, num_classes=self.n_classes).type(torch.float)
         context_mask = context_mask[:, None]
         context_mask = context_mask.repeat(1, self.n_classes)
         context_mask = -(1 - context_mask)  # flip 01

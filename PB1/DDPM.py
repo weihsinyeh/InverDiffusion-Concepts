@@ -5,8 +5,7 @@ import torch.nn as nn
 def ddpm_schedules(beta1, beta2, T):
     assert beta1 < beta2 < 1.0
 
-    beta_t = (beta2 - beta1) * torch.arange(0, T +
-                                            1, dtype=torch.float32) / T + beta1
+    beta_t = (beta2 - beta1) * torch.arange(0, T + 1, dtype=torch.float32) / T + beta1
     sqrt_beta_t = torch.sqrt(beta_t)
     alpha_t = 1 - beta_t
     log_alpha_t = torch.log(alpha_t)
@@ -33,12 +32,11 @@ def ddpm_schedules(beta1, beta2, T):
 class DDPM(nn.Module):
     def __init__(self, model, betas, n_T, device, drop_prob=0.1) -> None:
         super().__init__()
+        self.model = model.to(self.device)
         self.n_T = n_T
         self.device = device
         self.drop_prob = drop_prob
         self.loss_fn = nn.MSELoss()
-
-        self.model = model.to(self.device)
 
         for k, v in ddpm_schedules(betas[0], betas[1], self.n_T).items():
             # buffers are saved with model, but not updating it
@@ -52,8 +50,7 @@ class DDPM(nn.Module):
             self.sqrtmab[_ts, None, None, None] * noise
 
         # context dropout
-        context_mask = torch.bernoulli(torch.ones(
-            *c.shape) * self.drop_prob).to(self.device)
+        context_mask = torch.bernoulli(torch.ones(*c.shape) * self.drop_prob).to(self.device)
 
         return self.loss_fn(noise, self.model(x_t, c, _ts / self.n_T, context_mask))
 
