@@ -7,7 +7,6 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 from torchvision import models, transforms
 import torchvision.transforms as trns
-from torchvision.datasets import MNIST
 from torchvision.utils import save_image, make_grid
 import matplotlib.pyplot as plt
 import os
@@ -17,8 +16,8 @@ from PIL import Image, ImageDraw, ImageFont
 from utils import beta_scheduler
 
 class DDIM:
-    def __init__(self, nn_model, timesteps=1000, beta_schedule=beta_scheduler()):
-        self.model = nn_model
+    def __init__(self, model, timesteps=1000, beta_schedule=beta_scheduler()):
+        self.model = model
         self.timesteps = timesteps
         self.betas = beta_schedule
 
@@ -67,7 +66,7 @@ class DDIM:
     def sample( self, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True,):
         c = self.timesteps // ddim_timesteps
         ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c)))
-
+        print(ddim_timestep_seq)
         # add one to get the final alpha values right (the ones from first scale to data during sampling)
         ddim_timestep_seq = ddim_timestep_seq + 1
         # previous sequence
@@ -78,7 +77,7 @@ class DDIM:
         filenames = [f"{i:02d}.pt" for i in range(0, batch_size)]
 
         tensors = [
-            torch.load(os.path.join("hw2_data/face/noise", filename))
+            torch.load(os.path.join("../hw2_data/face/noise", filename))
             for filename in filenames
         ]
 
@@ -141,17 +140,17 @@ class DDIM:
         return sample_img.cpu()
 
 
-def output_img(img_num=10, eta=0, image_dir="./PB2_output/"):
+def output_img(img_num=10, eta=0, image_dir="../PB2_output/"):
     # hardcoding these here
     n_T = 1000
     device = "cuda" if torch.cuda.is_available() else "cpu"
     save_dir = image_dir
-    UNet_pt_dir = "hw2_data/face/UNet.pt"
+    UNet_pt_dir = "../hw2_data/face/UNet.pt"
     unet_model = UNet()
     unet_model.load_state_dict(torch.load(UNet_pt_dir))
 
     ddim = DDIM(
-        nn_model=unet_model.to(device),
+        model=unet_model.to(device),
         timesteps=n_T,
     )
 
@@ -168,8 +167,8 @@ def output_img(img_num=10, eta=0, image_dir="./PB2_output/"):
 
 
 def Compare_mse():
-    img_dir = "./PB2_output/"
-    GT_dir = "./hw2_data/face/GT/"
+    img_dir = "../PB2_output/"
+    GT_dir = "../hw2_data/face/GT/"
     img = [f"{img_dir}{i:02d}.png" for i in range(10)]
     GT = [f"{GT_dir}{i:02d}.png" for i in range(10)]
     transform = transforms.Compose([transforms.ToTensor(),])
@@ -189,7 +188,7 @@ def Compare_mse():
         mse = torch.nn.functional.mse_loss(img, GT)
         print(f"MSE for image pair {i}: {mse.item():5f}")
 
-    save_dir = "./PB2_output/"
+    save_dir = "../PB2_output/"
     save_image(compare_img_list, save_dir + f"compare.png")
 
 
@@ -207,8 +206,8 @@ def normal_to_255(tensor):
 
 
 def eta_compare():
-    ori_dir = "./PB2_output/"
-    img_dir = "./PB2_output/eta_compare/"
+    ori_dir = "../PB2_output/"
+    img_dir = "../PB2_output/eta_compare/"
 
     imgs_grid = torch.empty(0, dtype=torch.float32)
 
@@ -235,7 +234,7 @@ def eta_compare():
     save_image(imgs_grid, img_dir + "grid.png")
 
 
-if __name__ == "__main__":d
+if __name__ == "__main__":
     torch.manual_seed(42)
     output_img()
     eta_compare()
