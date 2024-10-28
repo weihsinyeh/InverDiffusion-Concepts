@@ -156,7 +156,16 @@ class TextualInversionDataset(Dataset):
         }[interpolation]
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
-        self.flip_transform = transforms.RandomHorizontalFlip(p=self.flip_p)
+        self.augmentation = transforms.Compose([ 
+                                transforms.RandomApply( [transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p = 0.3),
+                                transforms.RandomGrayscale(p = 0.2),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.RandomApply( [transforms.GaussianBlur((3, 3), (1.0, 2.0))], p = 0.3),
+                                transforms.RandomApply( [
+                                transforms.Pad(20),
+                                transforms.RandomResizedCrop((512, 512))], p= 0.3),
+                                transforms.ToTensor(),
+                                transforms.Normalize( mean = torch.tensor([0.485, 0.456, 0.406]), std = torch.tensor([0.229, 0.224, 0.225]))])
 
     def __len__(self):
         return self._length
@@ -194,7 +203,7 @@ class TextualInversionDataset(Dataset):
         image = Image.fromarray(img)
         image = image.resize((self.size, self.size), resample=self.interpolation)
 
-        image = self.flip_transform(image)
+        image = self.augmentation(image)
         image = np.array(image).astype(np.uint8)
         image = (image / 127.5 - 1.0).astype(np.float32)
 
