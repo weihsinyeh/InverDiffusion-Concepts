@@ -163,9 +163,7 @@ class TextualInversionDataset(Dataset):
                                 transforms.RandomApply( [transforms.GaussianBlur((3, 3), (1.0, 2.0))], p = 0.3),
                                 transforms.RandomApply( [
                                 transforms.Pad(20),
-                                transforms.RandomResizedCrop((512, 512))], p= 0.3),
-                                transforms.ToTensor(),
-                                transforms.Normalize( mean = torch.tensor([0.485, 0.456, 0.406]), std = torch.tensor([0.229, 0.224, 0.225]))])
+                                transforms.RandomResizedCrop((512, 512))], p= 0.3)])
 
     def __len__(self):
         return self._length
