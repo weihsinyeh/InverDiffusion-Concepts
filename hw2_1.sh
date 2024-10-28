@@ -1,5 +1,12 @@
 #!/bin/bash
 
 # TODO - run your inference Python3 code
-# $ # $ python PB1_inference.py /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/PB1_output
-python3 PB1_inference.py ./PB1_output
+if [ -z "$1" ]; then
+    echo "Usage: $0 <path_to_output_directory>"
+    exit 1
+fi
+
+OUTPUT_DIR="$1"
+
+# $ python PB1_inference.py ./PB1_output
+python3 PB1/PB1_inference.py "$OUTPUT_DIR"

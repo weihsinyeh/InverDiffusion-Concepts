@@ -64,13 +64,7 @@ class DDIM:
 
     # use ddim to sample
     @torch.no_grad()
-    def sample(
-        self,
-        batch_size=10,
-        ddim_timesteps=50,
-        ddim_eta=0.0,
-        clip_denoised=True,
-    ):
+    def sample( self, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True,):
         c = self.timesteps // ddim_timesteps
         ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c)))
 
@@ -82,14 +76,12 @@ class DDIM:
         device = next(self.model.parameters()).device
         # start from pure noise (for each example in the batch)
         filenames = [f"{i:02d}.pt" for i in range(0, batch_size)]
-        # 讀取所有的 .pt 文件並將它們存儲到一個列表中
+
         tensors = [
             torch.load(os.path.join("hw2_data/face/noise", filename))
             for filename in filenames
         ]
 
-        # 串連所有的張量
-        # 想要沿著第0維串連張量，所以dim=0
         sample_img = torch.cat(tensors, dim=0)
 
         for i in tqdm(
@@ -180,11 +172,7 @@ def Compare_mse():
     GT_dir = "./hw2_data/face/GT/"
     img = [f"{img_dir}{i:02d}.png" for i in range(10)]
     GT = [f"{GT_dir}{i:02d}.png" for i in range(10)]
-    transform = transforms.Compose(
-        [
-            transforms.ToTensor(),
-        ]
-    )
+    transform = transforms.Compose([transforms.ToTensor(),])
 
     compare_img_list = torch.empty(0, dtype=torch.float32)
     for i, (generated_path, ground_truth_path) in enumerate(zip(img, GT)):
@@ -193,14 +181,11 @@ def Compare_mse():
         compare_img = torch.cat((img, GT), dim=1)
         compare_img_list = torch.cat((compare_img_list, compare_img), dim=2)
 
-        # convert to 0~255
         img = normal_to_255(img)
         GT = normal_to_255(GT)
 
-        # 確保大小一樣
         assert img.shape == GT.shape
 
-        # Calc MSE
         mse = torch.nn.functional.mse_loss(img, GT)
         print(f"MSE for image pair {i}: {mse.item():5f}")
 
@@ -250,9 +235,8 @@ def eta_compare():
     save_image(imgs_grid, img_dir + "grid.png")
 
 
-if __name__ == "__main__":
-    # set random seed
-    torch.manual_seed(0)
+if __name__ == "__main__":d
+    torch.manual_seed(42)
     output_img()
     eta_compare()
     Compare_mse()

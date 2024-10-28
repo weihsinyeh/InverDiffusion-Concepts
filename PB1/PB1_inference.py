@@ -32,7 +32,7 @@ model.eval()
 for class_idx in range(20):
     gened_count = 0
     with torch.no_grad():
-        x_i, _ = model.class_gen(100, size=(3, 28, 28), device=device, class_idx=class_idx, guide_w=2)
+        x_i, _ = model.class_gen(50, size=(3, 28, 28), device=device, class_idx=class_idx, guide_w=2)
     for image in x_i:
         gened_count += 1
         if (class_idx < 10):
