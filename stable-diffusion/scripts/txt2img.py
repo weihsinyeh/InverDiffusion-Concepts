@@ -140,7 +140,7 @@ def main():
     parser.add_argument(
         "--n_iter",
         type=int,
-        default=2,
+        default=5,
         help="sample this often",
     )
     parser.add_argument(
@@ -170,7 +170,7 @@ def main():
     parser.add_argument(
         "--n_samples",
         type=int,
-        default=3,
+        default=5,
         help="how many samples to produce for each given prompt. A.k.a. batch size",
     )
     parser.add_argument(
@@ -215,6 +215,18 @@ def main():
         choices=["full", "autocast"],
         default="autocast"
     )
+    parser.add_argument(
+        "--prompt_num",
+        type=str,
+        help="indicate which prompt",
+        default="0"
+    )
+    parser.add_argument(
+        "--source_num",
+        type=str,
+        help="indicate which prompt",
+        default="0"
+    )
     opt = parser.parse_args()
 
     if opt.laion400m:
@@ -254,7 +266,7 @@ def main():
             data = f.read().splitlines()
             data = list(chunk(data, batch_size))
 
-    sample_path = os.path.join(outpath, "samples")
+    sample_path = os.path.join(outpath, opt.prompt_num)
     os.makedirs(sample_path, exist_ok=True)
     base_count = len(os.listdir(sample_path))
     grid_count = len(os.listdir(outpath)) - 1
@@ -299,7 +311,7 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                                img.save(os.path.join(sample_path, f"source{opt.source_num}_prompt{opt.prompt_num}_{base_count}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
@@ -325,4 +337,5 @@ def main():
 
 
 if __name__ == "__main__":
+    torch.manual_seed(42)
     main()

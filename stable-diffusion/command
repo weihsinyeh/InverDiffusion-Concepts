@@ -1,2 +1,13 @@
-$ python finetune_2.py > tmp
-$ python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "<new1>"  > tmp2
+$ python finetune.py > logdir/1028_0
+$ python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "<new1>"
+
+$ CUDA_VISIVLE_DEVICES=0 python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "A <new1> shepherd posing proudly on a hilltop with Mount Fuji in the background."  > logdir/txt2img1028 --outdir "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/output_folder_example/0" --skip_grid --prompt_num 0 --source_num 0
+$ CUDA_VISIVLE_DEVICES=0 python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "A <new1> perched on a park bench with the Colosseum looming behind."  > logdir/txt2img1028 --outdir "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/output_folder_example/0" --skip_grid --prompt_num 1 --source_num 0
+$ CUDA_VISIVLE_DEVICES=0 python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "A dog shepherd posing proudly on a hilltop with Mount Fuji in the background."  > logdir/txt2img1028 --outdir "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/output_folder_example/0" --skip_grid --prompt_num 2 --source_num 0
+$ CUDA_VISIVLE_DEVICES=0 python scripts/txt2img.py --ckpt "/project/g/r13922043/hw2/checkpoints/fine_tuned_19.ckpt" --prompt "A dog perched on a park bench with the Colosseum looming behind."  > logdir/txt2img1028 --outdir "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/output_folder_example/0" --skip_grid --prompt_num 3 --source_num 0
+
+parser = argparse.ArgumentParser(description='Process some JSON data.')
+    parser.add_argument('--json_path', type=str, help='Path to the JSON file')
+    parser.add_argument('--input_dir', type=str, default='.', help='Directory of the hw2_data/textual_inversion')
+    parser.add_argument('--output_dir', type=str, default='.', help='Directory of saved output')
+python evaluation/grade_hw2_3.py --json_path "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input_0.json" --input_dir "/project/g/r13922043/hw2_data/textual_inversion" --output_dir "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/output_folder_example"

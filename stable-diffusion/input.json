@@ -1,0 +1,20 @@
+{
+    "0":{
+        "src_image": "dog",
+        "token_name": "<new1>",
+        "prompt": ["A <new1> shepherd posing proudly on a hilltop with Mount Fuji in the background.", 
+            "A <new1> perched on a park bench with the Colosseum looming behind."],
+        "prompt_4_clip_eval": ["A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.", 
+            "A dog perched on a park bench with the Colosseum looming behind."],
+        "baseline": [[79, 34], [74, 35]]
+    },
+    "1":{
+        "src_image": "David Revoy",
+        "token_name": "<new2>",
+        "prompt": ["The streets of Paris in the style of <new2>.", 
+            "Manhattan skyline in the style of <new2>."],
+        "prompt_4_clip_eval": ["The streets of Paris in the style of David Revoy.", 
+            "Manhattan skyline in the style of David Revoy."],
+        "baseline": [[70, 30], [70, 30]]
+    }
+}

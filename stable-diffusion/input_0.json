@@ -1,0 +1,11 @@
+{
+    "0":{
+        "src_image": "dog",
+        "token_name": "<new1>",
+        "prompt": ["A <new1> shepherd posing proudly on a hilltop with Mount Fuji in the background.", 
+            "A <new1> perched on a park bench with the Colosseum looming behind."],
+        "prompt_4_clip_eval": ["A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.", 
+            "A dog perched on a park bench with the Colosseum looming behind."],
+        "baseline": [[79, 34], [74, 35]]
+    }
+}
