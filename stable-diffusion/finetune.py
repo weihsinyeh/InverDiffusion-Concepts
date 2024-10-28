@@ -239,7 +239,7 @@ text_encoder = model.cond_stage_model
 
 text_encoder.transformer.resize_token_embeddings(len(tokenizer))
 
-optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=6e-3)
+optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=5e-3)
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
