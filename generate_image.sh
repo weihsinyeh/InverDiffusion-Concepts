@@ -2,7 +2,7 @@
 
 # Base paths
 checkpoint_dir="/project/g/r13922043/hw2/checkpoints/1028_data_aug"
-output_base_dir="/project/g/r13922043/hw2/output/1028_data_aug"
+output_base_dir="/project/g/r13922043/hw2/output/1029_data_aug"
 
 # Iterate over all checkpoints in the specified directory
 for checkpoint in "$checkpoint_dir"/*.ckpt; do

@@ -11,7 +11,7 @@ from torchvision.utils import save_image, make_grid
 import matplotlib.pyplot as plt
 import os
 from PIL import Image, ImageDraw, ImageFont
-from utils import beta_scheduler
+from PB2.utils import beta_scheduler
 
 class DDIM:
     def __init__(self, model, timesteps=1000, beta_schedule=beta_scheduler()):
@@ -136,45 +136,6 @@ class DDIM:
             sample_img = x_prev
 
         return sample_img.cpu()
-
-def Compare_mse():
-    img_dir = "../PB2_output/"
-    GT_dir = "../hw2_data/face/GT/"
-    img = [f"{img_dir}{i:02d}.png" for i in range(10)]
-    GT = [f"{GT_dir}{i:02d}.png" for i in range(10)]
-    transform = transforms.Compose([transforms.ToTensor(),])
-
-    compare_img_list = torch.empty(0, dtype=torch.float32)
-    for i, (generated_path, ground_truth_path) in enumerate(zip(img, GT)):
-        img = transform(Image.open(generated_path))
-        GT = transform(Image.open(ground_truth_path))
-        compare_img = torch.cat((img, GT), dim=1)
-        compare_img_list = torch.cat((compare_img_list, compare_img), dim=2)
-
-        img = normal_to_255(img)
-        GT = normal_to_255(GT)
-
-        assert img.shape == GT.shape
-
-        mse = torch.nn.functional.mse_loss(img, GT)
-        print(f"MSE for image pair {i}: {mse.item():5f}")
-
-    save_dir = "../PB2_output/"
-    save_image(compare_img_list, save_dir + f"compare.png")
-
-
-def normal_to_255(tensor):
-    for i, x in enumerate(tensor):
-        new_values = []
-        for row in x:
-            new_row = []
-            for value in row:
-                new_value = int(value * 255)
-                new_row.append(new_value)
-            new_values.append(new_row)
-        tensor[i] = torch.tensor(new_values)
-    return tensor
-
 
 def eta_compare():
     ori_dir = "../PB2_output/"
