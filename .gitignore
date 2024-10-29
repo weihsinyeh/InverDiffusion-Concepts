@@ -1,7 +1,8 @@
 #Ignore the dataset
 #IMPORTANT: make sure that your dataset is stored in a folder with the same as the one specified below
 
-
+PB2_output_test
+PB1_output_test
 *png
 *jpg
 *.pyc
