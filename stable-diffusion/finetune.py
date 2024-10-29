@@ -126,7 +126,6 @@ imagenet_style_templates_small = [
     "a large painting in the style of {}",
 ]
 
-
 class TextualInversionDataset(Dataset):
     def __init__(
         self,
@@ -208,6 +207,13 @@ os.makedirs(output_dir, exist_ok=True)
 
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/0"
 placeholder_token = "<new1>"
+
+output_image_dir = "/project/g/r13922043/hw2/output/1030_0"
+os.makedirs(output_image_dir, exist_ok=True)
+
+# Load JSON file for evaluation
+with open(input_json_path, 'r') as f:
+    pormpt_data = json.load(f)
 
 # Load Model Configuration and Checkpoint
 config  = OmegaConf.load(config_path)
@@ -296,6 +302,7 @@ for epoch in range(50):  # Adjust epochs as needed
     # Save the model's state_dict inside the checkpoint dictionary
     torch.save(checkpoint, new_ckpt_path)
     '''
+    
     # Save the newly trained embeddings
     # weight_name = "learned_embeds.bin" if args.no_safe_serialization else "learned_embeds.safetensors"
     # save_path = os.path.join(args.output_dir, weight_name)
@@ -304,4 +311,37 @@ for epoch in range(50):  # Adjust epochs as needed
                     [placeholder_token_id],
                     placeholder_token,
                     save_path,
-                    safe_serialization= True,)
+                    safe_serialization= False)
+    
+    # Do evaluation :
+    model.evaluation()
+    learned_embeds_dict = torch.load(save_path, map_location=device)[placeholder_token]
+    tokenizer.add_tokens(placeholder_token)
+    token_id = tokenizer.convert_tokens_to_ids(placeholder_token)
+    text_encoder.resize_token_embeddings(len(tokenizer))
+    text_encoder.get_input_embeddings().weight.data[token_id] = learned_embeds_dict
+
+    for source_num, details in pormpt_data.items():
+        token_name = details["token_name"]
+        prompts = details["prompt"]
+
+        # Iterate over each prompt for this source
+        for prompt_num, prompt_text in enumerate(prompts):
+            prompt_output_dir = os.path.join(output_image_dir, source_num)
+            os.makedirs(prompt_output_dir, exist_ok=True)
+            
+            # Generate image
+            with autocast("cuda"):
+                for i in range(5):
+                    # Set up the conditioning and image generation
+                    conditioning = model.get_learned_conditioning([prompt_text])
+                    sample = model.sample(  conditioning=conditioning,
+                                            batch_size=5)
+                    
+                    for image in sample:
+                        # Convert numpy image to PIL and save
+                        images = numpy_to_pil(image)
+                        output_dir = os.path.join(prompt_output_dir, f"{prompt_num}")
+                        os.makedirs(output_dir, exist_ok=True)
+                        image_save_path = os.path.join(output_dir, f"{prompt_num}_{i}.png")
+                        images[0].save(image_save_path)
