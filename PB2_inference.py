@@ -2,15 +2,14 @@ from PB2.DDIM import DDIM
 from PB2.UNet import UNet
 from torchvision.utils import save_image
 import argparse, torch, os
-def output_img(args):
-    # hardcoding these here
+def output_img(input_noise, output_dir, UNet_pretrain):
     n_T = 1000
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # Set the output directory for the generated images
-    save_dir = args.output_images
+    save_dir = output_dir
 
     # load the pretrained UNet model
-    UNet_pt_dir = args.UNet_pt
+    UNet_pt_dir = UNet_pretrain
     print(f"Loading the pretrained UNet model from {UNet_pt_dir}")
     unet_model = UNet()
 
@@ -19,7 +18,7 @@ def output_img(args):
     ddim = DDIM( model=unet_model.to(device), timesteps=n_T)
 
     with torch.no_grad():
-        x_gen = ddim.sample(args.input_noise,batch_size=10, ddim_eta=0)
+        x_gen = ddim.sample(input_noise,batch_size=10, ddim_eta=0)
         for i in range(len(x_gen)):
             img = x_gen[i]
             min_val = torch.min(img)
@@ -49,4 +48,4 @@ def parser():
 if __name__ == "__main__":
     torch.manual_seed(42)
     args = parser()
-    output_img(args)
+    output_img(args.input_noise, args.output_images, args.UNet_pt)
