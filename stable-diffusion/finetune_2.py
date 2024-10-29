@@ -191,7 +191,7 @@ class TextualInversionDataset(Dataset):
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
 checkpoint_path = "/project/g/r13922043/hw2/checkpoints/1029_0/fine_tuned_4.ckpt"
-output_dir = "/project/g/r13922043/hw2/checkpoints/1028_data_aug2"
+output_dir = "/project/g/r13922043/hw2/checkpoints/1029_1"
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/1"
 placeholder_token = "<new2>"
 
