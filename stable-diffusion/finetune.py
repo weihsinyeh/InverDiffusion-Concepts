@@ -234,8 +234,7 @@ text_encoder.transformer.resize_token_embeddings(len(tokenizer))
 # Initialise the newly added placeholder token with the embeddings of the initializer token
 token_embeds = text_encoder.transformer.get_input_embeddings().weight.data
 with torch.no_grad():
-    for token_id in placeholder_token_id:
-        token_embeds[token_id] = token_embeds[initializer_token_id].clone()
+    token_embeds[placeholder_token_id] = token_embeds[initializer_token_id].clone()
 
 
 optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=5e-3)
