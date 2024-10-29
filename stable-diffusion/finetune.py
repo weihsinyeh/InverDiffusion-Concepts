@@ -198,7 +198,7 @@ class TextualInversionDataset(Dataset):
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
 checkpoint_path = "./ldm/models/stable-diffusion-v1/model.ckpt"
-output_dir = "/project/g/r13922043/hw2/checkpoints/1028_data_aug"
+output_dir = "/project/g/r13922043/hw2/checkpoints/1029_data_aug"
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/0"
 placeholder_token = "<new1>"
 
@@ -217,13 +217,26 @@ train_data = TextualInversionDataset(data_root=image_folder,  tokenizer=tokenize
 train_dataloader = DataLoader(train_data, batch_size=8, shuffle=True, num_workers= 4)
 
 # Convert token to IDs
-token_ids = tokenizer.encode(placeholder_token)
+# token_ids = tokenizer.encode(placeholder_token)
+token_ids = tokenizer.encode("Corgi", add_special_tokens=False)
+# Check if initializer_token is a single token or a sequence of tokens
+if len(token_ids) > 1:
+    raise ValueError("The initializer token must be a single token.")
+
+initializer_token_id = token_ids[0]
 placeholder_token_id = tokenizer.convert_tokens_to_ids(placeholder_token)
 
 # Load text encoder
 text_encoder = model.cond_stage_model
 
 text_encoder.transformer.resize_token_embeddings(len(tokenizer))
+
+# Initialise the newly added placeholder token with the embeddings of the initializer token
+token_embeds = text_encoder.get_input_embeddings().weight.data
+with torch.no_grad():
+    for token_id in placeholder_token_id:
+        token_embeds[token_id] = token_embeds[initializer_token_id].clone()
+
 
 optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=5e-3)
 

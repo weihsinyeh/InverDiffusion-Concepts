@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Base paths
-checkpoint_dir="/project/g/r13922043/hw2/checkpoints/1028_data_aug"
-output_base_dir="/project/g/r13922043/hw2/output/1029_data_aug"
+checkpoint_dir="/project/g/r13922043/hw2/checkpoints/1029_0"
+output_base_dir="/project/g/r13922043/hw2/output/1029_0"
 
 # Check if an epoch argument is passed
 if [ -n "$1" ]; then
