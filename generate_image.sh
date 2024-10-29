@@ -57,10 +57,7 @@ else
         CUDA_VISIBLE_DEVICES=0 python scripts/txt2img.py --ckpt "$checkpoint" --prompt "Manhattan skyline in the style of David Revoy." --outdir "$output_dir/1" --skip_grid --prompt_num 3 --source_num 1
 
         cd ..
-
         # Run the evaluation script
         python evaluation/grade_hw2_3.py --json_path "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input.json" --input_dir "/project/g/r13922043/hw2_data/textual_inversion" --output_dir "$output_dir"
     done
 fi
-
-echo "All checkpoints processed."

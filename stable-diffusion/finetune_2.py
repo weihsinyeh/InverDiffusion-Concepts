@@ -189,11 +189,11 @@ class TextualInversionDataset(Dataset):
         example["pixel_values"] = torch.from_numpy(image).permute(2, 0, 1)
         return example
 
-config_path = "./configs/stable-diffusion/v1-inference.yaml"
-checkpoint_path = "/project/g/r13922043/hw2/checkpoints/1029_0/fine_tuned_4.ckpt"
-output_dir = "/project/g/r13922043/hw2/checkpoints/1029_1"
-image_folder = "/project/g/r13922043/hw2_data/textual_inversion/1"
-placeholder_token = "<new2>"
+config_path         = "./configs/stable-diffusion/v1-inference.yaml"
+checkpoint_path     = "/project/g/r13922043/hw2/checkpoints/1029_0/fine_tuned_4.ckpt"
+output_dir          = "/project/g/r13922043/hw2/checkpoints/1029_1"
+image_folder        = "/project/g/r13922043/hw2_data/textual_inversion/1"
+placeholder_token   = "<new2>"
 
 # Load Model Configuration and Checkpoint
 config = OmegaConf.load(config_path)
@@ -273,9 +273,9 @@ for epoch in range(50):  # Adjust epochs as needed
         print(f"Epoch {epoch}, Step {step}, Loss: {loss.item()}")
 
     model.cond_stage_model.tokenizer = tokenizer
-    ckpt_name = "fine_tuned_" + str(epoch)+ ".ckpt"
-    new_ckpt_path = os.path.join(output_dir, ckpt_name)
-    checkpoint = {"state_dict": model.state_dict()}
+    ckpt_name       = "fine_tuned_" + str(epoch)+ ".ckpt"
+    new_ckpt_path   = os.path.join(output_dir, ckpt_name)
+    checkpoint      = {"state_dict": model.state_dict()}
     checkpoint["tokenizer"] = tokenizer
     # Save the model's state_dict inside the checkpoint dictionary
     torch.save(checkpoint, new_ckpt_path)

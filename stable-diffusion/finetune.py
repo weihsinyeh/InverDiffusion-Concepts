@@ -10,6 +10,18 @@ from torch.utils.data import Dataset, DataLoader
 from omegaconf import OmegaConf
 import numpy as np
 
+def save_progress(text_encoder, placeholder_token_ids, placeholder_token, save_path, safe_serialization=True):
+    logger.info("Saving embeddings")
+    learned_embeds = text_encoder.get_input_embeddings().weight[
+        min(placeholder_token_ids) : max(placeholder_token_ids) + 1
+    ]
+    learned_embeds_dict = {placeholder_token: learned_embeds.detach().cpu()}
+
+    if safe_serialization:
+        safetensors.torch.save_file(learned_embeds_dict, save_path, metadata={"format": "pt"})
+    else:
+        torch.save(learned_embeds_dict, save_path)
+
 def load_model_from_config2(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
@@ -155,8 +167,7 @@ class TextualInversionDataset(Dataset):
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
         self.augmentation = transforms.RandomChoice([   transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16),
                                                         transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.16),
-                                                        transforms.RandomApply([transforms.Pad(20),
-                                                                                transforms.RandomResizedCrop((512, 512))], p= 0.16)])
+                                                        transforms.RandomApply([transforms.Pad(20), transforms.RandomResizedCrop((512, 512))], p= 0.16)])
 
     def __len__(self):
         return self._length
@@ -177,15 +188,11 @@ class TextualInversionDataset(Dataset):
 
         if self.center_crop:
             crop = min(img.shape[0], img.shape[1])
-            h, w, = (
-                img.shape[0],
-                img.shape[1],
-            )
+            h, w, = ( img.shape[0], img.shape[1])
             img = img[(h - crop) // 2 : (h + crop) // 2, (w - crop) // 2 : (w + crop) // 2]
 
         image = Image.fromarray(img)
         image = image.resize((self.size, self.size), resample=self.interpolation)
-
         image = self.augmentation(image)
         image = np.array(image).astype(np.uint8)
         image = (image / 127.5 - 1.0).astype(np.float32)
@@ -195,13 +202,16 @@ class TextualInversionDataset(Dataset):
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
 checkpoint_path = "./ldm/models/stable-diffusion-v1/model.ckpt"
-output_dir = "/project/g/r13922043/hw2/checkpoints/1029_0"
+
+output_dir = "/project/g/r13922043/hw2/checkpoints/1030_0"
+os.makedirs(output_dir, exist_ok=True)
+
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/0"
 placeholder_token = "<new1>"
 
 # Load Model Configuration and Checkpoint
-config = OmegaConf.load(config_path)
-model = load_model_from_config(config, checkpoint_path)
+config  = OmegaConf.load(config_path)
+model   = load_model_from_config(config, checkpoint_path)
 
 # Initialize CLIPTokenizer and add placeholder token
 tokenizer = model.cond_stage_model.tokenizer
@@ -277,6 +287,7 @@ for epoch in range(50):  # Adjust epochs as needed
         optimizer.zero_grad()
         print(f"Epoch {epoch}, Step {step}, Loss: {loss.item()}")
 
+    '''
     model.cond_stage_model.tokenizer = tokenizer
     ckpt_name = "fine_tuned_" + str(epoch)+ ".ckpt"
     new_ckpt_path = os.path.join(output_dir, ckpt_name)
@@ -284,3 +295,13 @@ for epoch in range(50):  # Adjust epochs as needed
     checkpoint["tokenizer"] = tokenizer
     # Save the model's state_dict inside the checkpoint dictionary
     torch.save(checkpoint, new_ckpt_path)
+    '''
+    # Save the newly trained embeddings
+    # weight_name = "learned_embeds.bin" if args.no_safe_serialization else "learned_embeds.safetensors"
+    # save_path = os.path.join(args.output_dir, weight_name)
+    save_path = os.path.join(output_dir, ckpt_name)
+    save_progress(  text_encoder,
+                    [placeholder_token_id],
+                    placeholder_token,
+                    save_path,
+                    safe_serialization= True,)

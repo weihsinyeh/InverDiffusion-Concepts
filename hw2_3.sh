@@ -8,3 +8,4 @@
 # (e.g. “~/hw2_data/textual_inversion/input.json”)
 # $2: path to your output folder (e.g. “~/output_folder”)
 # $3: path to the pretrained model weight (e.g. “~/hw2/personalization/model.ckpt”)
+python3 PB3_inference.py $1 $2 $3
