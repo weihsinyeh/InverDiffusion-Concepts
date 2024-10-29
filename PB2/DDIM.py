@@ -11,7 +11,7 @@ from torchvision.utils import save_image, make_grid
 import matplotlib.pyplot as plt
 import os
 from PIL import Image, ImageDraw, ImageFont
-from PB2.utils import beta_scheduler
+from utils import beta_scheduler
 
 class DDIM:
     def __init__(self, model, timesteps=1000, beta_schedule=beta_scheduler()):
@@ -158,6 +158,7 @@ class DDIM:
             sample_img = x_prev
 
         return sample_img.cpu()
+    
 
 def eta_compare():
     ori_dir = "../PB2_output/"

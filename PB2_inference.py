@@ -2,7 +2,10 @@ from PB2.DDIM import DDIM
 from PB2.UNet import UNet
 from torchvision.utils import save_image
 import argparse, torch, os
-def output_img(input_noise, output_dir, UNet_pretrain, interpolation = linear):
+def output_img( input_noise, 
+                output_dir, 
+                UNet_pretrain, 
+                interpolation = linear):
     n_T = 1000
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # Set the output directory for the generated images
@@ -31,7 +34,19 @@ def output_img(input_noise, output_dir, UNet_pretrain, interpolation = linear):
                 save_path = os.path.join(save_dir, f"{i:02d}.png")
 
                 save_image(normalized_x_gen, save_path)
-        else: # 
+        else:
+            x_gen = ddim.slerp_sample(input_noise,batch_size=10, ddim_eta=0)
+            for i in range(len(x_gen)):
+                img = x_gen[i]
+                min_val = torch.min(img)
+                max_val = torch.max(img)
+
+                # apply min-max normalization to the DDIM output images 
+                # before saving them with torchvision.utils.save_image, to avoid contrast issues.
+                normalized_x_gen = (img - min_val) / (max_val - min_val)
+                save_path = os.path.join(save_dir, f"{i:02d}.png")
+
+                save_image(normalized_x_gen, save_path)
 
 '''
 $1: path to the directory of predefined noises (e.g. “~/hw2/DDIM/input_noise”)

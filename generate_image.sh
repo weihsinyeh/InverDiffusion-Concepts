@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Base paths
-checkpoint_dir="/project/g/r13922043/hw2/checkpoints/1029_0"
-output_base_dir="/project/g/r13922043/hw2/output/1029_0"
+checkpoint_dir="/project/g/r13922043/hw2/checkpoints/1029_1"
+output_base_dir="/project/g/r13922043/hw2/output/1029_1"
 
 # Check if an epoch argument is passed
 if [ -n "$1" ]; then
@@ -46,7 +46,7 @@ else
         cd ..
 
         # Run the evaluation script
-        python evaluation/grade_hw2_3.py --json_path "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input_0.json" --input_dir "/project/g/r13922043/hw2_data/textual_inversion" --output_dir "$output_dir"
+        python evaluation/grade_hw2_3.py --json_path "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input.json" --input_dir "/project/g/r13922043/hw2_data/textual_inversion" --output_dir "$output_dir"
     done
 fi
 
