@@ -10,8 +10,6 @@ import torchvision.transforms as trns
 from torchvision.utils import save_image, make_grid
 import matplotlib.pyplot as plt
 import os
-from PIL import Image
-from UNet import UNet
 from PIL import Image, ImageDraw, ImageFont
 from utils import beta_scheduler
 
@@ -63,7 +61,7 @@ class DDIM:
 
     # use ddim to sample
     @torch.no_grad()
-    def sample( self, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True,):
+    def sample( self, predefined_noises, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True):
         c = self.timesteps // ddim_timesteps
         ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c)))
         print(ddim_timestep_seq)
@@ -77,7 +75,7 @@ class DDIM:
         filenames = [f"{i:02d}.pt" for i in range(0, batch_size)]
 
         tensors = [
-            torch.load(os.path.join("../hw2_data/face/noise", filename))
+            torch.load(os.path.join(predefined_noises, filename))
             for filename in filenames
         ]
 
@@ -138,33 +136,6 @@ class DDIM:
             sample_img = x_prev
 
         return sample_img.cpu()
-
-
-def output_img(img_num=10, eta=0, image_dir="../PB2_output/"):
-    # hardcoding these here
-    n_T = 1000
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    save_dir = image_dir
-    UNet_pt_dir = "../hw2_data/face/UNet.pt"
-    unet_model = UNet()
-    unet_model.load_state_dict(torch.load(UNet_pt_dir))
-
-    ddim = DDIM(
-        model=unet_model.to(device),
-        timesteps=n_T,
-    )
-
-    with torch.no_grad():
-        x_gen = ddim.sample(batch_size=img_num, ddim_eta=eta)
-        for i in range(len(x_gen)):
-            img = x_gen[i]
-            min_val = torch.min(img)
-            max_val = torch.max(img)
-
-            # Min-Max Normalization
-            normalized_x_gen = (img - min_val) / (max_val - min_val)
-            save_image(normalized_x_gen, save_dir + f"{i:02d}.png")
-
 
 def Compare_mse():
     img_dir = "../PB2_output/"

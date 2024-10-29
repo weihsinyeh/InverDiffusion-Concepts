@@ -5,8 +5,8 @@ from pathlib import Path
 import torch
 from torchvision.utils import save_image
 
-from PB1.DDPM import DDPM 
-from PB1.model import Unet
+from DDPM import DDPM 
+from model import Unet
 
 random.seed(0)
 torch.manual_seed(0)
@@ -20,9 +20,9 @@ ckpt_dir = Path('./P1_ckpt/100_ddpm.pth')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # $ python PB1_inference.py /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/PB1_output
-model = DDPM(   model=Unet(     in_channels=3,
-                                n_features=128,
-                                n_classes=20),
+model = DDPM(   model=Unet(     input_channels=3,
+                                num_features=128,
+                                num_classes=20),
                                 betas=(1e-4, 0.02),
                                 n_T=500,
                                 device=device,

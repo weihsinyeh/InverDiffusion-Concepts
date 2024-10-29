@@ -156,14 +156,13 @@ class TextualInversionDataset(Dataset):
         }[interpolation]
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
-        self.augmentation = transforms.Compose([ 
-                                transforms.RandomApply( [transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p = 0.3),
-                                transforms.RandomGrayscale(p = 0.2),
-                                transforms.RandomHorizontalFlip(),
-                                transforms.RandomApply( [transforms.GaussianBlur((3, 3), (1.0, 2.0))], p = 0.3),
-                                transforms.RandomApply( [
+        self.augmentation = self.augmentation = transforms.RandomChoice([ 
+                                transforms.RandomApply([transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p = 0.15),
+                                transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.15),
+                                transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.15),
+                                transforms.RandomApply([
                                 transforms.Pad(20),
-                                transforms.RandomResizedCrop((512, 512))], p= 0.3)])
+                                transforms.RandomResizedCrop((512, 512))], p= 0.15)])
 
     def __len__(self):
         return self._length

@@ -1,0 +1,1280 @@
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_0.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch0/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_0.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch0/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_0.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch0/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_0.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch0/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 74.86
+CLIP Text Score: 37.00
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 51.43
+CLIP Text Score: 32.99
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_10.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch10/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_10.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch10/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_10.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch10/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_10.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch10/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 82.04
+CLIP Text Score: 29.00
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 77.78
+CLIP Text Score: 33.09
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_11.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch11/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_11.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch11/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_11.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch11/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_11.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch11/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 81.78
+CLIP Text Score: 30.68
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 74.25
+CLIP Text Score: 33.74
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_12.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch12/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_12.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch12/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_12.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch12/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_12.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch12/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 82.66
+CLIP Text Score: 28.81
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 81.23
+CLIP Text Score: 30.32
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_13.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch13/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_13.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch13/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_13.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch13/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_13.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch13/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.61
+CLIP Text Score: 29.01
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 81.79
+CLIP Text Score: 29.61
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_14.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch14/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_14.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch14/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_14.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch14/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_14.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch14/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.04
+CLIP Text Score: 29.81
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 82.39
+CLIP Text Score: 29.14
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_15.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch15/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_15.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch15/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_15.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch15/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_15.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch15/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.89
+CLIP Text Score: 30.23
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 82.70
+CLIP Text Score: 28.68
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_16.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch16/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_16.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch16/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_16.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch16/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_16.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch16/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.12
+CLIP Text Score: 28.88
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 84.35
+CLIP Text Score: 27.18
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_17.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch17/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_17.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch17/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_17.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch17/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_17.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch17/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 82.99
+CLIP Text Score: 29.62
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 81.31
+CLIP Text Score: 29.45
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_18.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch18/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_18.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch18/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_18.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch18/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_18.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch18/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 82.63
+CLIP Text Score: 30.33
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 83.89
+CLIP Text Score: 28.83
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_19.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch19/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_19.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch19/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_19.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch19/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_19.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch19/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 82.88
+CLIP Text Score: 30.56
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 85.52
+CLIP Text Score: 26.35
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_1.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch1/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_1.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch1/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_1.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch1/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_1.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch1/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 76.26
+CLIP Text Score: 36.71
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 54.11
+CLIP Text Score: 34.45
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_20.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch20/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_20.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch20/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_20.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch20/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_20.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch20/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.53
+CLIP Text Score: 27.07
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 84.48
+CLIP Text Score: 25.69
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_2.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch2/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_2.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch2/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_2.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch2/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_2.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch2/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 76.84
+CLIP Text Score: 36.91
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 60.41
+CLIP Text Score: 34.13
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_3.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch3/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_3.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch3/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_3.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch3/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_3.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch3/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 78.57
+CLIP Text Score: 37.04
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 62.81
+CLIP Text Score: 34.64
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_4.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch4/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_4.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch4/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_4.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch4/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_4.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch4/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.83
+CLIP Text Score: 35.95
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 66.37
+CLIP Text Score: 34.75
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 1/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_5.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch5/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_5.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch5/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_5.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch5/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_5.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch5/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.80
+CLIP Text Score: 35.03
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 66.32
+CLIP Text Score: 35.05
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 1/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_6.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch6/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_6.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch6/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_6.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch6/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_6.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch6/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 78.65
+CLIP Text Score: 34.78
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 70.00
+CLIP Text Score: 34.36
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_7.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch7/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_7.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch7/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_7.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch7/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_7.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch7/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 79.13
+CLIP Text Score: 32.94
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 70.39
+CLIP Text Score: 34.81
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_8.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch8/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_8.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch8/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_8.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch8/0 
+ 
+Enjoy.
+Loading model from /project/g/r13922043/hw2/checkpoints/1028_data_aug/fine_tuned_8.ckpt
+LatentDiffusion: Running in eps-prediction mode
+DiffusionWrapper has 859.52 M params.
+making attention of type 'vanilla' with 512 in_channels
+Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+making attention of type 'vanilla' with 512 in_channels
+Size mismatch detected: loaded 49409, current 49408. Resizing embeddings.
+Creating invisible watermark encoder (see https://github.com/ShieldMnt/invisible-watermark)...
+Your samples are ready and waiting for you here: 
+/project/g/r13922043/hw2/output/1028_data_aug/epoch8/0 
+ 
+Enjoy.
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 81.14
+CLIP Text Score: 31.11
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 70.86
+CLIP Text Score: 32.88
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases

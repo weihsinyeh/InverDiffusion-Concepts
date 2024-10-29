@@ -32,9 +32,9 @@ def ddpm_schedules(beta1, beta2, T):
 class DDPM(nn.Module):
     def __init__(self, model, betas, n_T, device, drop_prob=0.1) -> None:
         super().__init__()
-        self.model = model.to(self.device)
-        self.n_T = n_T
         self.device = device
+        self.model = model.to(device)
+        self.n_T = n_T
         self.drop_prob = drop_prob
         self.loss_fn = nn.MSELoss()
 

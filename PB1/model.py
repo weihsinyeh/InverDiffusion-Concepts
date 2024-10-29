@@ -95,24 +95,24 @@ class Unet(nn.Module):
 
         self.to_vec = nn.Sequential( nn.AvgPool2d(7), nn.GELU())
 
-        self.time_embed1 = EmbedFC(1, 2 * n_features)
-        self.time_embed2 = EmbedFC(1, n_features)
+        self.time_embed1 = EmbedFC(1, 2 * num_features)
+        self.time_embed2 = EmbedFC(1, num_features)
 
-        self.contextembed1 = EmbedFC(n_classes, 2 * n_features)
-        self.contextembed2 = EmbedFC(n_classes, n_features)
+        self.contextembed1 = EmbedFC(num_classes, 2 * num_features)
+        self.contextembed2 = EmbedFC(num_classes, num_features)
 
         self.decode0 = nn.Sequential(
-            nn.ConvTranspose2d(2 * n_features, 2 * n_features, kernel_size=7, stride=7),
-            nn.GroupNorm(8, 2 * n_features),
+            nn.ConvTranspose2d(2 * num_features, 2 * num_features, kernel_size=7, stride=7),
+            nn.GroupNorm(8, 2 * num_features),
             nn.ReLU(True),
         )
-        self.decode1 = Unet_decoder(4 * n_features, n_features)
-        self.decode2 = Unet_decoder(2 * n_features, n_features)
+        self.decode1 = Unet_decoder(4 * num_features, num_features)
+        self.decode2 = Unet_decoder(2 * num_features, num_features)
         self.out = nn.Sequential(
-            nn.Conv2d(2 * n_features, n_features, kernel_size=3, stride=1, padding=1),
-            nn.GroupNorm(8, n_features),
+            nn.Conv2d(2 * num_features, num_features, kernel_size=3, stride=1, padding=1),
+            nn.GroupNorm(8, num_features),
             nn.ReLU(True),
-            nn.Conv2d(n_features, self.in_channels, kernel_size=3, stride=1, padding=1)
+            nn.Conv2d(num_features, self.input_channels, kernel_size=3, stride=1, padding=1)
         )
 
     def forward(self, x, c, t, context_mask):
@@ -122,18 +122,18 @@ class Unet(nn.Module):
         hidden_vec = self.to_vec(enc2)
 
         # convert context to one hot embedding
-        c = nn.functional.one_hot(c, num_classes=self.n_classes).type(torch.float)
+        c = nn.functional.one_hot(c, num_classes=self.num_classes).type(torch.float)
         context_mask = context_mask[:, None]
-        context_mask = context_mask.repeat(1, self.n_classes)
+        context_mask = context_mask.repeat(1, self.num_classes)
         context_mask = -(1 - context_mask)  # flip 01
         # context_mask is for context dropout
         c *= context_mask
 
         # embed context and time step
-        c_emb1 = self.contextembed1(c).reshape(-1, self.n_features * 2, 1, 1)
-        t_emb1 = self.time_embed1(t).reshape(-1, self.n_features * 2, 1, 1)
-        c_emb2 = self.contextembed2(c).reshape(-1, self.n_features, 1, 1)
-        t_emb2 = self.time_embed2(t).reshape(-1, self.n_features, 1, 1)
+        c_emb1 = self.contextembed1(c).reshape(-1, self.num_features * 2, 1, 1)
+        t_emb1 = self.time_embed1(t).reshape(-1, self.num_features * 2, 1, 1)
+        c_emb2 = self.contextembed2(c).reshape(-1, self.num_features, 1, 1)
+        t_emb2 = self.time_embed2(t).reshape(-1, self.num_features, 1, 1)
 
         dec1 = self.decode0(hidden_vec)
         dec2 = self.decode1(x=c_emb1 * dec1 + t_emb1, skip=enc2)
