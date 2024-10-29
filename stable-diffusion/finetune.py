@@ -156,13 +156,10 @@ class TextualInversionDataset(Dataset):
         }[interpolation]
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
-        self.augmentation = self.augmentation = transforms.RandomChoice([ 
-                                transforms.RandomApply([transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p = 0.15),
-                                transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.15),
-                                transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.15),
-                                transforms.RandomApply([
-                                transforms.Pad(20),
-                                transforms.RandomResizedCrop((512, 512))], p= 0.15)])
+        self.augmentation = transforms.RandomChoice([   transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16),
+                                                        transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.16),
+                                                        transforms.RandomApply([transforms.Pad(20),
+                                                                                transforms.RandomResizedCrop((512, 512))], p= 0.16)])
 
     def __len__(self):
         return self._length
@@ -176,15 +173,7 @@ class TextualInversionDataset(Dataset):
 
         placeholder_string = self.placeholder_token
         text = random.choice(self.templates).format(placeholder_string)
-        '''
-        example["input_ids"] = self.tokenizer(
-            text,
-            padding="max_length",
-            truncation=True,
-            max_length=self.tokenizer.model_max_length,
-            return_tensors="pt",
-        ).input_ids[0]
-        '''
+
         example["input_ids"] = text
         # default to score-sde preprocessing
         img = np.array(image).astype(np.uint8)
@@ -241,11 +230,7 @@ optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().para
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 # Training loop
-<<<<<<< HEAD
 for epoch in range(50):  # Adjust epochs as needed
-=======
-for epoch in range(40):  # Adjust epochs as needed
->>>>>>> 3a5ca952d99096616cce40c460094d81cc57765a
     model.train()
     for step, batch in enumerate(train_dataloader):
         optimizer.zero_grad()
@@ -292,39 +277,3 @@ for epoch in range(40):  # Adjust epochs as needed
     checkpoint["tokenizer"] = tokenizer
     # Save the model's state_dict inside the checkpoint dictionary
     torch.save(checkpoint, new_ckpt_path)
-
-'''
-
-state_dict = torch.load(checkpoint_path)
-
-# Locate the parameter for the original embedding weights
-embedding_key = "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"
-embedding_weights = state_dict["state_dict"].get(embedding_key, None)
-
-if embedding_weights is None:
-    raise KeyError(f"cannot fine embedding weights.")
-
-vocab_size, embedding_dim = embedding_weights.shape
-print(f"Original embedding dimension: {embedding_weights.shape}")
-
-updated_embeddings = text_encoder.transformer.get_input_embeddings().weight.data.clone()
-state_dict["state_dict"][embedding_key] = updated_embeddings
-tokenizer_key = "cond_stage_model.tokenizer"
-state_dict[tokenizer_key] = tokenizer
-# Assume your trained text_encoder is already on the CPU and in 'text_encoder'
-# Save the state_dict of your new text_encoder
-text_encoder_state_dict = text_encoder.state_dict()
-# Replace the relevant part in the original state dict
-state_dict["state_dict"]["cond_stage_model.transformer"] = text_encoder_state_dict
-
-new_ckpt_path = os.path.join(output_dir, "fine_tuned.ckpt")
-torch.save(state_dict, new_ckpt_path)
-print(f"New model is saved to: {new_ckpt_path}")
-
-config = OmegaConf.load(config_path)
-model, tokenizer = load_model_from_config2(config, new_ckpt_path)
-tokens = tokenizer('<new1>', return_tensors="pt", padding=True, truncation=True)
-print("tokens",tokens)
-tokenizer = model.cond_stage_model.tokenizer
-tokens = tokenizer('<new1>', return_tensors="pt", padding=True, truncation=True)
-'''
