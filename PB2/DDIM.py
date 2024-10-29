@@ -59,14 +59,24 @@ class DDIM:
         out = out.reshape(batch_size, *((1,) * (len(x_shape) - 1)))
         return out
 
+    def slerp(self, t, v0, v1):
+        """Spherical Linear Interpolation (Slerp) between v0 and v1 by ratio t."""
+        dot = torch.sum(v0 * v1 / (torch.norm(v0) * torch.norm(v1)), dim=1, keepdim=True)
+        theta = torch.acos(dot) * t
+        sin_theta = torch.sin(theta)
+        sin_theta_0 = torch.sin(torch.acos(dot))
+        s0 = torch.sin((1 - t) * theta) / sin_theta_0
+        s1 = sin_theta / sin_theta_0
+        return s0 * v0 + s1 * v1
+
     # use ddim to sample
     @torch.no_grad()
     def sample( self, predefined_noises, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True):
         c = self.timesteps // ddim_timesteps
-        ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c)))
-        print(ddim_timestep_seq)
         # add one to get the final alpha values right (the ones from first scale to data during sampling)
-        ddim_timestep_seq = ddim_timestep_seq + 1
+        ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c))) + 1
+        print(ddim_timestep_seq) # check
+
         # previous sequence
         ddim_timestep_prev_seq = np.append(np.array([0]), ddim_timestep_seq[:-1])
 
@@ -78,61 +88,73 @@ class DDIM:
             torch.load(os.path.join(predefined_noises, filename))
             for filename in filenames
         ]
-
         sample_img = torch.cat(tensors, dim=0)
 
-        for i in tqdm(
-            reversed(range(0, ddim_timesteps)),
-            desc="Sampling loop time step",
-            total=ddim_timesteps,
-        ):
-            t = torch.full(
-                (batch_size,), ddim_timestep_seq[i], device=device, dtype=torch.long
-            )
-            prev_t = torch.full(
-                (batch_size,),
-                ddim_timestep_prev_seq[i],
-                device=device,
-                dtype=torch.long,
-            )
+        for i in tqdm(reversed(range(0, ddim_timesteps)), desc="Sampling loop time step", total=ddim_timesteps,):
+            t = torch.full((batch_size,), ddim_timestep_seq[i], device=device, dtype=torch.long)
+            prev_t = torch.full((batch_size,), ddim_timestep_prev_seq[i], device=device, dtype=torch.long,)
 
             # 1. get current and previous alpha_cumprod
             alpha_cumprod_t = self._extract(self.alphas_cumprod, t, sample_img.shape)
-            alpha_cumprod_t_prev = self._extract(
-                self.alphas_cumprod, prev_t, sample_img.shape
-            )
+            alpha_cumprod_t_prev = self._extract(self.alphas_cumprod, prev_t, sample_img.shape)
 
-            # 2. predict noise using model
             pred_noise = self.model(sample_img, t)
 
             # 3. get the predicted x_0
-            pred_x0 = (
-                sample_img - torch.sqrt((1.0 - alpha_cumprod_t)) * pred_noise
-            ) / torch.sqrt(alpha_cumprod_t)
+            pred_x0 = (sample_img - torch.sqrt((1.0 - alpha_cumprod_t)) * pred_noise) / torch.sqrt(alpha_cumprod_t)
 
             if clip_denoised:
                 pred_x0 = torch.clamp(pred_x0, min=-1.0, max=1.0)
 
             # 4. compute variance: "sigma_t(η)" -> see formula (16)
             # σ_t = sqrt((1 − α_t−1)/(1 − α_t)) * sqrt(1 − α_t/α_t−1)
-            sigmas_t = ddim_eta * torch.sqrt(
-                (1 - alpha_cumprod_t_prev)
-                / (1 - alpha_cumprod_t)
-                * (1 - alpha_cumprod_t / alpha_cumprod_t_prev)
-            )
+            sigmas_t = ddim_eta * torch.sqrt((1 - alpha_cumprod_t_prev) / (1 - alpha_cumprod_t) * (1 - alpha_cumprod_t / alpha_cumprod_t_prev))
 
             # 5. compute "direction pointing to x_t" of formula (12)
-            pred_dir_xt = (
-                torch.sqrt(1 - alpha_cumprod_t_prev - sigmas_t**2) * pred_noise
-            )
+            pred_dir_xt = (torch.sqrt(1 - alpha_cumprod_t_prev - sigmas_t**2) * pred_noise)
 
             # 6. compute x_{t-1} of formula (12)
-            x_prev = (
-                torch.sqrt(alpha_cumprod_t_prev) * pred_x0
-                + pred_dir_xt
-                + sigmas_t * torch.randn_like(sample_img)
-            )
+            x_prev = (torch.sqrt(alpha_cumprod_t_prev) * pred_x0 + pred_dir_xt + sigmas_t * torch.randn_like(sample_img))
+            sample_img = x_prev
 
+        return sample_img.cpu()
+
+    def slerp_sample(self, predefined_noises, batch_size=10, ddim_timesteps=50, ddim_eta=0.0, clip_denoised=True):
+        c = self.timesteps // ddim_timesteps
+        ddim_timestep_seq = np.asarray(list(range(0, self.timesteps, c))) + 1
+        # add one to get the final alpha values right (the ones from first scale to data during sampling)
+
+        ddim_timestep_prev_seq = np.append(np.array([0]), ddim_timestep_seq[:-1])
+
+        device = next(self.model.parameters()).device
+        filenames = [f"{i:02d}.pt" for i in range(batch_size)]
+
+        tensors = [torch.load(os.path.join(predefined_noises, filename)) for filename in filenames]
+        sample_img = torch.cat(tensors, dim=0)
+
+        for i in tqdm(reversed(range(ddim_timesteps)), desc="Sampling loop time step", total=ddim_timesteps):
+            t = torch.full((batch_size,), ddim_timestep_seq[i], device=device, dtype=torch.long)
+            prev_t = torch.full((batch_size,), ddim_timestep_prev_seq[i], device=device, dtype=torch.long)
+
+            alpha_cumprod_t = self._extract(self.alphas_cumprod, t, sample_img.shape)
+            alpha_cumprod_t_prev = self._extract(self.alphas_cumprod, prev_t, sample_img.shape)
+
+            pred_noise = self.model(sample_img, t)
+            pred_x0 = (sample_img - torch.sqrt((1.0 - alpha_cumprod_t)) * pred_noise) / torch.sqrt(alpha_cumprod_t)
+
+            if clip_denoised:
+                pred_x0 = torch.clamp(pred_x0, -1.0, 1.0)
+
+            sigmas_t = ddim_eta * torch.sqrt(
+                (1 - alpha_cumprod_t_prev) / (1 - alpha_cumprod_t) * (1 - alpha_cumprod_t / alpha_cumprod_t_prev)
+            )
+            pred_dir_xt = torch.sqrt(1 - alpha_cumprod_t_prev - sigmas_t**2) * pred_noise
+
+            # Apply Slerp for interpolation
+            noise = torch.randn_like(sample_img)
+            sample_img = self.slerp(ddim_eta, sample_img, noise)
+
+            x_prev = torch.sqrt(alpha_cumprod_t_prev) * pred_x0 + pred_dir_xt + sigmas_t * noise
             sample_img = x_prev
 
         return sample_img.cpu()
@@ -144,7 +166,7 @@ def eta_compare():
     imgs_grid = torch.empty(0, dtype=torch.float32)
 
     for eta in np.arange(0, 1.25, 0.25):
-        output_img(img_num=10, eta=eta, image_dir=img_dir)
+        output_img(img_num=10, eta=eta, image_dir=img_dir, interpolation = linear)
         imgs = [f"{img_dir}{i:02d}.png" for i in range(10)]
         imgs_row = torch.empty(0, dtype=torch.float32)
         for img in imgs:

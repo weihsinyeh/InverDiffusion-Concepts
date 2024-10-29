@@ -1,18 +1,15 @@
-import torch
-import os
+import torch, os, random, itertools, PIL
 from ldm.models.diffusion.ddpm import LatentDiffusion
 from ldm.modules.encoders.modules import FrozenCLIPEmbedder
 from ldm.util import instantiate_from_config
 from transformers import CLIPTokenizer
 import torch.optim as optim
-import PIL
 from PIL import Image
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
-import itertools
 from omegaconf import OmegaConf
 import numpy as np
-import random
+
 def load_model_from_config2(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
@@ -228,14 +225,12 @@ placeholder_token_id = tokenizer.convert_tokens_to_ids(placeholder_token)
 
 # Load text encoder
 text_encoder = model.cond_stage_model
-
 text_encoder.transformer.resize_token_embeddings(len(tokenizer))
 
 # Initialise the newly added placeholder token with the embeddings of the initializer token
 token_embeds = text_encoder.transformer.get_input_embeddings().weight.data
 with torch.no_grad():
     token_embeds[placeholder_token_id] = token_embeds[initializer_token_id].clone()
-
 
 optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().parameters(), lr=5e-3)
 

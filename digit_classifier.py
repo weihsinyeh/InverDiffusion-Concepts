@@ -68,6 +68,7 @@ def evaluate_model(model, data_loader, device):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
     return correct, total
+# Usage :
 # $ python digit_classifier.py --folder /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/PB1_output --checkpoint /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/Classifier.pth
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -120,7 +120,7 @@ class TextualInversionDataset(Dataset):
         self,
         data_root,
         tokenizer,
-        learnable_property="object",  # [object, style]
+        learnable_property="style",  # [object, style]
         size=512,
         repeats=100,
         interpolation="bicubic",
@@ -190,7 +190,7 @@ class TextualInversionDataset(Dataset):
         return example
 
 config_path = "./configs/stable-diffusion/v1-inference.yaml"
-checkpoint_path = "./ldm/models/stable-diffusion-v1/model.ckpt"
+checkpoint_path = "/project/g/r13922043/hw2/checkpoints/1029_0/fine_tuned_4.ckpt"
 output_dir = "/project/g/r13922043/hw2/checkpoints/1028_data_aug2"
 image_folder = "/project/g/r13922043/hw2_data/textual_inversion/1"
 placeholder_token = "<new2>"
