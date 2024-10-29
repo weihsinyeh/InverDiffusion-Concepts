@@ -221,7 +221,7 @@ optimizer = optim.AdamW(    text_encoder.transformer.get_input_embeddings().para
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 # Training loop
-for epoch in range(20):  # Adjust epochs as needed
+for epoch in range(40):  # Adjust epochs as needed
     model.train()
     for step, batch in enumerate(train_dataloader):
         optimizer.zero_grad()
