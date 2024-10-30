@@ -14,11 +14,11 @@ def output_img( input_noise,
     # load the pretrained UNet model
     UNet_pt_dir = UNet_pretrain
     print(f"Loading the pretrained UNet model from {UNet_pt_dir}")
-    unet_model = UNet()
+    unetmodel = UNet()
 
-    unet_model.load_state_dict(torch.load(UNet_pt_dir))
+    unetmodel.load_state_dict(torch.load(UNet_pt_dir))
 
-    ddim = DDIM( model=unet_model.to(device), timesteps=n_T, beta_schedule=beta_scheduler())
+    ddim = DDIM( model=unetmodel.to(device), timesteps=n_T, beta_schedule=beta_scheduler())
 
     with torch.no_grad():
         

@@ -35,9 +35,7 @@ def Compare_mse(image_dir, GroundTruth_dir, output_dir):
         print(f"MSE for image pair {i}: {mse.item():5f}")
 
     # Save the compare image
-    save_dir = os.path.join(output_dir, "visualize/")
-    os.makedirs(save_dir, exist_ok=True)
-    save_image(compare_image_list, save_dir + f"compareMSE.png")
+    save_image(compare_image_list, "compareMSE.png")
 
 # Usage : 
 # $ python3 ./PB2/MSE_score.py ./PB2_output/ ./hw2_data/face/GT/ ./PB2_output/
