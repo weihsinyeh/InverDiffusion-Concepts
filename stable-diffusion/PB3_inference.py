@@ -125,12 +125,12 @@ def main(input_json_path, output_image_dir, checkpoint_path):
 def parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('input_json_path',  type=str, help='path to the directory of predefined noises')
-    parser.add_argument('output_image_dir', type=str, help='path to your output folder (e.g. “~/output_folder”)')
-    parser.add_argument('checkpoint_path',  type=str, help='path to the pretrained model weight (e.g. “~/hw2/personalization/model.ckpt”)')
+    parser.add_argument('output_image_dir', type=str, help='path to your output folder (e.g. ~/output_folder)')
+    parser.add_argument('checkpoint_path',  type=str, help='path to the pretrained model weight (e.g. ~/hw2/personalization/model.ckpt)')
     return parser.parse_args()
 
 if __name__ == "__main__":
-    torch.manual_seed(42)
+    torch.manual_seed(40)
     args = parser()
     os.makedirs(args.output_image_dir, exist_ok= True)
     main(args.input_json_path, args.output_image_dir, args.checkpoint_path)
