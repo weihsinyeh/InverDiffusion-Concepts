@@ -9,8 +9,8 @@ fi
 OUTPUT_DIR="$1"
 
 # first make the directories
-mkdir -p "$OUTPUT_DIR"
-mkdir -p "$OUTPUT_DIR/mnistm" "$OUTPUT_DIR/svhn"
+mkdir -p "$OUTPUT_DIR/mnistm"
+mkdir -p "$OUTPUT_DIR/svhn"
 # Usage:
 # $ mkdir PB1_output
 # $ python3 PB1_inference.py ./PB1_output
