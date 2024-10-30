@@ -19,11 +19,12 @@ ckpt_dir = Path('./P1_ckpt/100_ddpm.pth')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # $ python PB1_inference.py /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/PB1_output
-model = DDPM( model = Unet( input_channels = 3, num_features = 128, num_classes = 20),
-              betas = (1e-4, 0.02),
-              n_T = 500,
-              device = device,
+model = DDPM( model     = Unet( input_channels = 3, num_features = 128, num_classes = 20),
+              betas     = (1e-4, 0.02),
+              n_T       = 500,
+              device    = device,
               drop_prob = 0.1)
+              
 model = model.to(device)
 model.load_state_dict(torch.load(ckpt_dir, map_location=device))
 model.eval()

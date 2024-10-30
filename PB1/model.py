@@ -42,10 +42,8 @@ class ResidualConvBlock(nn.Module):
 class Unet_encoder(nn.Module):
     def __init__(self, input_channels, output_channels) -> None:
         super().__init__()
-        self.net = nn.Sequential(
-            ResidualConvBlock(input_channels, output_channels),
-            nn.MaxPool2d(2)
-        )
+        self.net = nn.Sequential(   ResidualConvBlock(input_channels, output_channels),
+                                    nn.MaxPool2d(2))
 
     def forward(self, x):
         return self.net(x)
@@ -54,11 +52,9 @@ class Unet_encoder(nn.Module):
 class Unet_decoder(nn.Module):
     def __init__(self, input_channels, output_channels) -> None:
         super().__init__()
-        self.net = nn.Sequential(
-            nn.ConvTranspose2d(input_channels, output_channels, kernel_size=2, stride=2),
-            ResidualConvBlock(output_channels, output_channels),
-            ResidualConvBlock(output_channels, output_channels)
-        )
+        self.net = nn.Sequential(   nn.ConvTranspose2d(input_channels, output_channels, kernel_size=2, stride=2),
+                                    ResidualConvBlock(output_channels, output_channels),
+                                    ResidualConvBlock(output_channels, output_channels))
 
     def forward(self, x, skip):
         x = torch.cat((x, skip), 1)
@@ -70,11 +66,9 @@ class EmbedFC(nn.Module):
     def __init__(self, input_dimension, output_dimension) -> None:
         super().__init__()
         self.input_dimension = input_dimension
-        self.net = nn.Sequential(
-            nn.Linear(input_dimension, output_dimension),
-            nn.GELU(),
-            nn.Linear(output_dimension, output_dimension)
-        )
+        self.net = nn.Sequential(   nn.Linear(input_dimension, output_dimension),
+                                    nn.GELU(),
+                                    nn.Linear(output_dimension, output_dimension))
 
     def forward(self, x):
         x = x.reshape(-1, self.input_dimension)
@@ -130,14 +124,14 @@ class Unet(nn.Module):
         c *= context_mask
 
         # embed context and time step
-        c_emb1 = self.contextembed1(c).reshape(-1, self.num_features * 2, 1, 1)
-        t_emb1 = self.time_embed1(t).reshape(-1, self.num_features * 2, 1, 1)
-        c_emb2 = self.contextembed2(c).reshape(-1, self.num_features, 1, 1)
-        t_emb2 = self.time_embed2(t).reshape(-1, self.num_features, 1, 1)
+        c_emb1  = self.contextembed1(c).reshape(-1, self.num_features * 2, 1, 1)
+        t_emb1  = self.time_embed1(t).reshape(-1, self.num_features * 2, 1, 1)
+        c_emb2  = self.contextembed2(c).reshape(-1, self.num_features, 1, 1)
+        t_emb2  = self.time_embed2(t).reshape(-1, self.num_features, 1, 1)
 
-        dec1 = self.decode0(hidden_vec)
-        dec2 = self.decode1(x=c_emb1 * dec1 + t_emb1, skip=enc2)
-        dec3 = self.decode2(x=c_emb2 * dec2 + t_emb2, skip=enc1)
-        out = self.out(torch.cat((dec3, x), 1))
+        dec1    = self.decode0(hidden_vec)
+        dec2    = self.decode1(x=c_emb1 * dec1 + t_emb1, skip=enc2)
+        dec3    = self.decode2(x=c_emb2 * dec2 + t_emb2, skip=enc1)
+        out     = self.out(torch.cat((dec3, x), 1))
 
         return out

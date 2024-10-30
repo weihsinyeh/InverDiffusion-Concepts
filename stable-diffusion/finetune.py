@@ -1,4 +1,5 @@
-import torch, os, random, itertools, PIL
+import torch, os, random, itertools, PIL, json
+from tqdm import tqdm
 from ldm.models.diffusion.ddpm import LatentDiffusion
 from ldm.modules.encoders.modules import FrozenCLIPEmbedder
 from ldm.util import instantiate_from_config
@@ -9,10 +10,11 @@ from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from omegaconf import OmegaConf
 import numpy as np
-
+from torch import autocast
+from einops import rearrange
+from ldm.models.diffusion.dpm_solver import DPMSolverSampler
 def save_progress(text_encoder, placeholder_token_ids, placeholder_token, save_path, safe_serialization=True):
-    logger.info("Saving embeddings")
-    learned_embeds = text_encoder.get_input_embeddings().weight[
+    learned_embeds = text_encoder.transformer.get_input_embeddings().weight[
         min(placeholder_token_ids) : max(placeholder_token_ids) + 1
     ]
     learned_embeds_dict = {placeholder_token: learned_embeds.detach().cpu()}
@@ -73,6 +75,25 @@ def load_model_from_config(config, ckpt, verbose=False):
     model.cuda()
     model.eval()
     return model
+
+def numpy_to_pil(images):
+    """
+    Convert a numpy image or a batch of images to a PIL image.
+    """
+    # Check if images is a PyTorch tensor and convert it to NumPy
+    if isinstance(images, torch.Tensor):
+        # Move to CPU and convert to NumPy
+        images = images.cpu().numpy()
+
+    if images.ndim == 3:
+        images = images[None, ...]
+
+    # Scale and clamp the images to [0, 255]
+    images = (images * 255).round().clip(0, 255).astype(np.uint8)
+    # Convert each image in the batch to a PIL Image
+    pil_images = [Image.fromarray(image) for image in images]
+
+    return pil_images
 
 imagenet_templates_small = [
     "a photo of a {}",
@@ -211,9 +232,14 @@ placeholder_token = "<new1>"
 output_image_dir = "/project/g/r13922043/hw2/output/1030_0"
 os.makedirs(output_image_dir, exist_ok=True)
 
+input_json_path = "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input.json"
+
+# Set random seed
+torch.manual_seed(42)
+
 # Load JSON file for evaluation
 with open(input_json_path, 'r') as f:
-    pormpt_data = json.load(f)
+    prompt_data = json.load(f)
 
 # Load Model Configuration and Checkpoint
 config  = OmegaConf.load(config_path)
@@ -255,7 +281,7 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 # Training loop
 for epoch in range(50):  # Adjust epochs as needed
     model.train()
-    for step, batch in enumerate(train_dataloader):
+    for step, batch in enumerate(tqdm(train_dataloader, desc=f"Epoch {epoch} : Training Progress")):
         optimizer.zero_grad()
 
         batch["pixel_values"] = batch["pixel_values"].to(device)
@@ -306,6 +332,7 @@ for epoch in range(50):  # Adjust epochs as needed
     # Save the newly trained embeddings
     # weight_name = "learned_embeds.bin" if args.no_safe_serialization else "learned_embeds.safetensors"
     # save_path = os.path.join(args.output_dir, weight_name)
+    ckpt_name = "fine_tuned_" + str(epoch)+ ".ckpt"
     save_path = os.path.join(output_dir, ckpt_name)
     save_progress(  text_encoder,
                     [placeholder_token_id],
@@ -314,34 +341,51 @@ for epoch in range(50):  # Adjust epochs as needed
                     safe_serialization= False)
     
     # Do evaluation :
-    model.evaluation()
+    model.eval()
+    sampler = DPMSolverSampler(model)
+
     learned_embeds_dict = torch.load(save_path, map_location=device)[placeholder_token]
     tokenizer.add_tokens(placeholder_token)
     token_id = tokenizer.convert_tokens_to_ids(placeholder_token)
-    text_encoder.resize_token_embeddings(len(tokenizer))
-    text_encoder.get_input_embeddings().weight.data[token_id] = learned_embeds_dict
-
-    for source_num, details in pormpt_data.items():
-        token_name = details["token_name"]
-        prompts = details["prompt"]
-
+    text_encoder.transformer.resize_token_embeddings(len(tokenizer))
+    text_encoder.transformer.get_input_embeddings().weight.data[token_id] = learned_embeds_dict
+    epoch_dir = os.path.join(output_image_dir, f"epoch_{epoch}")
+    os.makedirs(epoch_dir, exist_ok=True)
+    for source_num, details in tqdm(prompt_data.items(), desc=f"Epoch {epoch} : Processing Prompts"):
+        token_name  = details["token_name"]
+        prompts     = details["prompt"]
+        sorce_output_dir = os.path.join(epoch_dir, f"{source_num}")
+        os.makedirs(sorce_output_dir, exist_ok = True)
         # Iterate over each prompt for this source
         for prompt_num, prompt_text in enumerate(prompts):
-            prompt_output_dir = os.path.join(output_image_dir, source_num)
+            prompt_output_dir = os.path.join(sorce_output_dir, f"{prompt_num}")
             os.makedirs(prompt_output_dir, exist_ok=True)
-            
+
             # Generate image
             with autocast("cuda"):
+                base_count = 0
                 for i in range(5):
                     # Set up the conditioning and image generation
-                    conditioning = model.get_learned_conditioning([prompt_text])
-                    sample = model.sample(  conditioning=conditioning,
-                                            batch_size=5)
+                    conditioning    = model.get_learned_conditioning([prompt_text] * 5)
+                    # samples_ddim = sampler.sample( S=50,cond = conditioning, batch_size = 5)
+                    shape = [4, 512 // 8, 512 // 8]
+                    uc = model.get_learned_conditioning(5 * [""])
+                    samples_ddim, _ = sampler.sample(  S=50,
+                                                    conditioning=conditioning,
+                                                    batch_size=5,
+                                                    shape=shape,
+                                                    verbose=False,
+                                                    unconditional_guidance_scale=7.5,
+                                                    unconditional_conditioning=uc,
+                                                    eta=0.0,
+                                                    x_T=None)
+                    x_samples_ddim  = model.decode_first_stage(samples_ddim)
+                    x_samples_ddim  = torch.clamp((x_samples_ddim + 1.0) / 2.0, min=0.0, max=1.0)
+                    x_samples_ddim = x_samples_ddim.cpu().permute(0, 2, 3, 1).numpy()
+                    x_checked_image_torch = torch.from_numpy(x_samples_ddim).permute(0, 3, 1, 2)
+                    for x_sample in x_checked_image_torch:
+                        x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
+                        img = Image.fromarray(x_sample.astype(np.uint8))
+                        img.save(os.path.join(prompt_output_dir, f"source{source_num}_prompt{prompt_num}_{base_count}.png"))
+                        base_count += 1
                     
-                    for image in sample:
-                        # Convert numpy image to PIL and save
-                        images = numpy_to_pil(image)
-                        output_dir = os.path.join(prompt_output_dir, f"{prompt_num}")
-                        os.makedirs(output_dir, exist_ok=True)
-                        image_save_path = os.path.join(output_dir, f"{prompt_num}_{i}.png")
-                        images[0].save(image_save_path)

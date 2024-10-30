@@ -10,9 +10,9 @@ from torchvision import transforms
 class digit_dataset(Dataset):
     def __init__(self, root, transform, label_csv, dataset_id) -> None:
         super().__init__()
-        self.Transform = transform
-        self.Image_names = list()
-        self.Labels = list()
+        self.Transform      = transform
+        self.Image_names    = list()
+        self.Labels         = list()
         self.Dataset_labels = []
 
         if isinstance(label_csv, list):

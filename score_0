@@ -1,0 +1,102 @@
+epoch_0
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.88
+CLIP Text Score: 35.16
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 74.64
+CLIP Text Score: 36.18
+
+=====================================================PASS======================================================
+
+You have passed 2/2 cases
+epoch_1
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 81.42
+CLIP Text Score: 35.27
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 73.88
+CLIP Text Score: 35.23
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 1/2 cases
+epoch_2
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 79.13
+CLIP Text Score: 36.25
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 72.33
+CLIP Text Score: 35.68
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 1/2 cases
+epoch_3
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.50
+CLIP Text Score: 35.06
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 76.31
+CLIP Text Score: 35.22
+
+=====================================================PASS======================================================
+
+You have passed 2/2 cases
+epoch_4
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 81.36
+CLIP Text Score: 34.80
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 76.94
+CLIP Text Score: 34.23
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 1/2 cases
+epoch_5
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 83.25
+CLIP Text Score: 33.53
+
+=========================================Fail! Baseline is 79.00/34.00=========================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 73.39
+CLIP Text Score: 35.47
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+You have passed 0/2 cases
