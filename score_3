@@ -1,0 +1,35 @@
+Processing /project/g/r13922043/hw2/output/1030_1/epoch_0...
+
+===============================================start evaluation================================================
+
+Image source: "David Revoy", text prompt: The streets of Paris in the style of David Revoy.
+CLIP Image Score: 67.87
+CLIP Text Score: 33.07
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+Image source: "David Revoy", text prompt: Manhattan skyline in the style of David Revoy.
+CLIP Image Score: 68.11
+CLIP Text Score: 31.50
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+You have passed 0/2 cases
+Processing /project/g/r13922043/hw2/output/1030_1/epoch_1...
+
+===============================================start evaluation================================================
+
+Image source: "David Revoy", text prompt: The streets of Paris in the style of David Revoy.
+CLIP Image Score: 69.98
+CLIP Text Score: 31.96
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+Image source: "David Revoy", text prompt: Manhattan skyline in the style of David Revoy.
+CLIP Image Score: 65.07
+CLIP Text Score: 32.49
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+You have passed 0/2 cases
+Processing /project/g/r13922043/hw2/output/1030_1/epoch_2...

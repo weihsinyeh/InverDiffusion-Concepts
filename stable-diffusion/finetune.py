@@ -13,6 +13,7 @@ import numpy as np
 from torch import autocast
 from einops import rearrange
 from ldm.models.diffusion.dpm_solver import DPMSolverSampler
+
 def save_progress(text_encoder, placeholder_token_ids, placeholder_token, save_path, safe_serialization=True):
     learned_embeds = text_encoder.transformer.get_input_embeddings().weight[
         min(placeholder_token_ids) : max(placeholder_token_ids) + 1
@@ -23,38 +24,6 @@ def save_progress(text_encoder, placeholder_token_ids, placeholder_token, save_p
         safetensors.torch.save_file(learned_embeds_dict, save_path, metadata={"format": "pt"})
     else:
         torch.save(learned_embeds_dict, save_path)
-
-def load_model_from_config2(config, ckpt, verbose=False):
-    print(f"Loading model from {ckpt}")
-    pl_sd = torch.load(ckpt, map_location="cpu")
-    if "global_step" in pl_sd:
-        print(f"Global Step: {pl_sd['global_step']}")
-    sd = pl_sd["state_dict"]
-    model = instantiate_from_config(config.model)
-    
-    # Check for the embeddings key
-    embedding_key = "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"
-
-    # Check if the embeddings key exists in the loaded state dict
-    if embedding_key in sd:
-        loaded_embedding_size = sd[embedding_key].size(0)
-        current_embedding_size = model.cond_stage_model.transformer.get_input_embeddings().weight.size(0)
-
-        if loaded_embedding_size != current_embedding_size:
-            print(f"Size mismatch detected: loaded {loaded_embedding_size}, current {current_embedding_size}. Resizing embeddings.")
-            model.cond_stage_model.transformer.resize_token_embeddings(loaded_embedding_size)
-
-    m, u = model.load_state_dict(sd, strict=False)
-    if len(m) > 0 and verbose:
-        print("missing keys:")
-        print(m)
-    if len(u) > 0 and verbose:
-        print("unexpected keys:")
-        print(u)
-
-    model.cuda()
-    model.eval()
-    return model, pl_sd['tokenizer']
 
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
@@ -185,9 +154,7 @@ class TextualInversionDataset(Dataset):
         }[interpolation]
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
-        self.augmentation = transforms.RandomChoice([   transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16),
-                                                        transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.16),
-                                                        transforms.RandomApply([transforms.Pad(20), transforms.RandomResizedCrop((512, 512))], p= 0.16)])
+        self.augmentation = transforms.RandomChoice([transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16)])
 
     def __len__(self):
         return self._length
@@ -224,7 +191,7 @@ def main(token_number):
     config_path = "./configs/stable-diffusion/v1-inference.yaml"
     checkpoint_path = "./ldm/models/stable-diffusion-v1/model.ckpt"
 
-    output_image_dir = "/project/g/r13922043/hw2/output/1030_0"
+    output_image_dir = "/project/g/r13922043/hw2/output/1030_1"
     os.makedirs(output_image_dir, exist_ok=True)
 
     if token_number == 0 :
@@ -243,7 +210,7 @@ def main(token_number):
         output_dir = "/project/g/r13922043/hw2/checkpoints/1030_1"
         os.makedirs(output_dir, exist_ok=True)
         placeholder_token = "<new2>"
-        initializer_token = "anime"
+        initializer_token = "cartoon"
         learnable_property = "style"
         input_json_path = "/tmp2/r13922043/dlcv-fall-2024-hw2-weihsinyeh/stable-diffusion/input_1.json"
         # Load JSON file for evaluation
@@ -264,6 +231,8 @@ def main(token_number):
 
     # Initialize CLIPTokenizer and add placeholder token
     tokenizer = model.cond_stage_model.tokenizer
+
+    # Add new token
     num_added_tokens = tokenizer.add_tokens([placeholder_token])
     if num_added_tokens == 0:
         raise ValueError(f"The tokenizer already contains the token {placeholder_token}. Please use a unique token.")
@@ -374,14 +343,14 @@ def main(token_number):
             text_encoder.transformer.get_input_embeddings().weight.data[token_id] = learned_embeds_dict
             epoch_dir = os.path.join(output_image_dir, f"epoch_{epoch}")
             os.makedirs(epoch_dir, exist_ok=True)
-            for source_num, details in tqdm(prompt_data.items(), desc=f"Epoch {epoch} : Processing Prompts"):
-                token_name  = details["token_name"]
-                combined_prompts = details["prompt"] + details["prompt_4_clip_eval"]
+            for source_num, details in prompt_data.items():
+                token_name          = details["token_name"]
+                combined_prompts    = details["prompt"] + details["prompt_4_clip_eval"]
 
                 sorce_output_dir = os.path.join(epoch_dir, f"{source_num}")
                 os.makedirs(sorce_output_dir, exist_ok = True)
                 # Iterate over each prompt for this source
-                for prompt_num, prompt_text in enumerate(combined_prompts):
+                for prompt_num, prompt_text in enumerate(tqdm(combined_prompts, desc=f"Epoch {epoch} : Processing Prompts")):
                     prompt_output_dir = os.path.join(sorce_output_dir, f"{prompt_num}")
                     os.makedirs(prompt_output_dir, exist_ok=True)
 
