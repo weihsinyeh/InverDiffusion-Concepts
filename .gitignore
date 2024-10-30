@@ -16,4 +16,6 @@ output_folder_example
 PB1_output
 P1_tb
 **__pycache__
-**ckpt
+ckpt
+bestmodel_PB1.pth
+/stable-diffusion/ldm/models/stable-diffusion-v1/model.ckpt

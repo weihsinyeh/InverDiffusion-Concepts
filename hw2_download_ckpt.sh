@@ -1,0 +1,1 @@
+wget -O bestmodel_PB1.pth 'https://www.dropbox.com/scl/fi/ic9idttq43fzcmucq7600/100_ddpm.pth?rlkey=q7f7p1e3045ma07py0jzrgm4i&st=97k9r11d&dl=1'

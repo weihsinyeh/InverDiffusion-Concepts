@@ -154,7 +154,9 @@ class TextualInversionDataset(Dataset):
         }[interpolation]
 
         self.templates = imagenet_style_templates_small if learnable_property == "style" else imagenet_templates_small
-        self.augmentation = transforms.RandomChoice([transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16)])
+        self.augmentation = transforms.RandomChoice([   transforms.RandomApply([transforms.RandomHorizontalFlip()], p = 0.16),
+                                                        transforms.RandomApply([transforms.GaussianBlur((3, 3), (1.0, 2.0))], p=0.16),
+                                                        transforms.RandomApply([transforms.Pad(20), transforms.RandomResizedCrop((512, 512))], p= 0.16)])
 
     def __len__(self):
         return self._length
@@ -191,7 +193,7 @@ def main(token_number):
     config_path = "./configs/stable-diffusion/v1-inference.yaml"
     checkpoint_path = "./ldm/models/stable-diffusion-v1/model.ckpt"
 
-    output_image_dir = "/project/g/r13922043/hw2/output/1030_1"
+    output_image_dir = "/project/g/r13922043/hw2/output/1030_1_test"
     os.makedirs(output_image_dir, exist_ok=True)
 
     if token_number == 0 :
@@ -207,7 +209,7 @@ def main(token_number):
             prompt_data = json.load(f)
     elif token_number == 1 :
         image_folder = "/project/g/r13922043/hw2_data/textual_inversion/1"
-        output_dir = "/project/g/r13922043/hw2/checkpoints/1030_1"
+        output_dir = "/project/g/r13922043/hw2/checkpoints/1030_1_test"
         os.makedirs(output_dir, exist_ok=True)
         placeholder_token = "<new2>"
         initializer_token = "cartoon"

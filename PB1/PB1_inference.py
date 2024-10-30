@@ -15,7 +15,7 @@ try:
     out_dir.mkdir(exist_ok=True, parents=True)
 except:
     pass
-ckpt_dir = Path('./P1_ckpt/100_ddpm.pth')
+ckpt_dir = Path('./bestmodel_PB1.pth')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # $ python PB1_inference.py /home/weihsin/project/dlcv-fall-2024-hw2-weihsinyeh/PB1_output

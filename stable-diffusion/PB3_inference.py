@@ -54,8 +54,8 @@ def numpy_to_pil(images):
 
 def main(input_json_path, output_image_dir, checkpoint_path):
     config_path = "./stable-diffusion/configs/stable-diffusion/v1-inference.yaml"
-    new1_checkpoint_path = "/project/g/r13922043/hw2/checkpoints/1030_0/fine_tuned_4.ckpt"
-    new2_checkpoint_path = "/project/g/r13922043/hw2/checkpoints/1030_1/fine_tuned_David1.ckpt"
+    new1_checkpoint_path = "./fine_tuned_Corgi8.ckpt"
+    new2_checkpoint_path = "./fine_tuned_David8.ckpt"
 
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     # Load Model Configuration and Checkpoint
@@ -97,14 +97,14 @@ def main(input_json_path, output_image_dir, checkpoint_path):
             # Generate image
             with autocast("cuda"):
                 base_count = 0
-                for i in range(5):
+                for i in range(25):
                     # Set up the conditioning and image generation
-                    conditioning    = model.get_learned_conditioning([prompt_text] * 5)
+                    conditioning    = model.get_learned_conditioning([prompt_text])
                     shape = [4, 512 // 8, 512 // 8]
-                    uc = model.get_learned_conditioning(5 * [""])
+                    uc = model.get_learned_conditioning(1 * [""])
                     samples_ddim, _ = sampler.sample(   S=50,
                                                         conditioning=conditioning,
-                                                        batch_size=5,
+                                                        batch_size=1,
                                                         shape=shape,
                                                         verbose=False,
                                                         unconditional_guidance_scale=7.5,
